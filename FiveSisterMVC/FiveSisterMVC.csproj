@@ -5,12 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Personal\PersonalCenter.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Personal\PersonalCenter.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\..\..\..\Desktop\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\..\实训一\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
   </ItemGroup>
 
