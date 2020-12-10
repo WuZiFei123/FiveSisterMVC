@@ -7,7 +7,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>五姐妹购物平台</title>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <link href="~/Content/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" />
@@ -44,6 +44,7 @@
                 </div>
                 <div class="topMessage favorite">
                     <div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>商品收藏</span></a></div>
+                </div>
             </ul>
         </div>
         <!--悬浮搜索框-->
@@ -54,8 +55,8 @@
             </div>
             <div class="search-bar pr">
                 <form>
-                    <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" >
-                    <input id="ai-topsearch" class="submit am-btn" onclick="Ser()" value="搜索">
+                    <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" />
+                    <input id="ai-topsearch" class="submit am-btn" onclick="Ser()" value="搜索" />
                 </form>
             </div>
         </div>
@@ -79,7 +80,7 @@
             </div>
             <!--轮播-->
             <div class="bannerTwo" style="margin:0 auto;width:79%;height:280px;">
-                <div class="layui-carousel"  id="test1" >
+                <div class="layui-carousel" id="test1">
                     <div carousel-item=carousel-item id="lunbo">
                     </div>
                 </div>
@@ -145,9 +146,9 @@
             <div class="row">
                 <ul id="hotgoods">
                     @*<li><a onclick=''><img src="~/Content/images/row1.jpg" /></a></li>
-                <li><a><img  src="~/Content/images/row2.jpg" /></a></li>
-                <li><a><img src="~/Content/images/row3.jpg" /></a></li>
-                <li><a><img src="~/Content/images/row4.jpg" /></a></li>*@
+                        <li><a><img  src="~/Content/images/row2.jpg" /></a></li>
+                        <li><a><img src="~/Content/images/row3.jpg" /></a></li>
+                        <li><a><img src="~/Content/images/row4.jpg" /></a></li>*@
                 </ul>
             </div>
             <div class="clear"></div>
@@ -194,10 +195,12 @@
                 }
             </script>
         </div>
+            
         <!--秒杀-->
         <div class="am-container">
             <div class="sale-mt">
                 <i></i>
+                <img src="~/images/kill.png" style="margin-top:22px;margin-left:-319px;width:56px;height:50px;border-bottom-left-radius:28%" />
                 <em class="sale-title">限时秒杀</em>
                 <div class="s-time" id="countdown">
                     <span id="shi" class="hh">00</span>
@@ -205,12 +208,12 @@
                     <span id="miao" class="ss">00</span>
                 </div>
             </div>
-            <div class="am-g am-g-fixed sale">
-                @for (int i = 0; i < 4; i++)
+            <div id="kills" class="am-g am-g-fixed sale">
+                @*@for (int i = 0; i < 4; i++)
                 {
                     <div class="am-u-sm-3 sale-item">
                         <div class="s-img">
-                            <a href="# "><img src="~/Content/images/sale3.jpg" /></a>
+                            <a href="#" ><img src="~/Content/images/sale3.jpg" /></a>
                         </div>
                         <div class="s-info">
                             <a href="#"><p class="s-title">ZEK 原味海苔</p></a>
@@ -218,7 +221,7 @@
                                 ￥<b>9.90</b>
                                 <div class="ms" style="">
                                     <form class="layui-form">
-                                        <button type="button" class="layui-btn layui-btn-disabled">秒杀</button>
+                                        <button  type="button" class="layui-btn layui-btn-disabled">秒杀</button>
                                     </form>
                                 </div>
                                 <div class="mss" style="">
@@ -229,7 +232,7 @@
                             </div>
                         </div>
                     </div>
-                }
+                }*@
             </div>
         </div>
         <script>
@@ -248,13 +251,14 @@
             .ms {
                 width: 68px;
                 height: 40px;
-                border-width:1px;
+                border-width: 1px;
                 margin-top: -36px;
                 margin-left: 183px;
                 background-color: white;
-                text-align:center;
-                color:black;
+                text-align: center;
+                color: black;
             }
+
             .mss {
                 width: 68px;
                 height: 40px;
@@ -264,11 +268,13 @@
                 background-color: white;
                 text-align: center;
             }
+
             .hot {
-                width:250px;
-                height:210px;
+                width: 250px;
+                height: 210px;
             }
         </style>
+    </div>
 </body>
 </html>
 <script>
@@ -308,80 +314,122 @@
                 //    type: "get",
                 //    contenttype: "application/x-www-form-urlencoded",
                 //    success: function (d) {
-                        
+
                 //    }
                 //});
-            } 
-        });     
-    });
-    function Lunbo() {
-        //热卖初始显示
-        $.ajax({
-            url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
-            dataType: "json",
-            type: "get",
-            contentType: "application/x-www-form-urlencoded",
-            success: function (d) {
-                $("#hotgoods").empty();
-                $(d).each(function () {
-                    var html = "<li><a onclick='Hot(" + this.goodsInfoId + ")'><img class='hot'   src='" + this.goodsInfoImage + "' /></a></li>";
-                    $("#hotgoods").append(html);
-                })
-            },
-            complete: function () {
-                //轮播24小时显示
-                setInterval(function () {
-                    layui.use('carousel', function () {
-                        var carousel = layui.carousel;
-                        $.ajax({
-                            url: "http://localhost:50519/api/GoodsInfo/GetActibityInfos",
-                            dataType: "json",
-                            type: "get",
-                            contentType: "application/x-www-form-urlencoded",
-                            success: function (d) {
-                                $("#lunbo").empty();
-                                console.log(d);
-                                $(d).each(function () {
-                                    var html = "<div><a onclick='Lun(" + this.goodsInfoIdOut + ")'><img src='" + this.actibityInfoImg + "' style='width:100%' /></a></div>";
-                                    ids.push(this.actibityInfoId);
-                                    $("#lunbo").append(html);
-                                })
-                                //建造实例
-                                carousel.render({
-                                    elem: '#test1'
-                                    , width: '80%' //设置容器宽度
-                                    , arrow: 'always' //始终显示箭头
-                                    , interval: 2000
-                                    //,anim: 'updown' //切换动画方式
-                                });
-                            }
-                        });
-                    });
-                },864000);
             }
         });
+    });
+    function Lunbo() {
+        //秒杀显示
+        $.ajax({
+            url: "http://localhost:50519/api/GoodsInfo/GetKillInfos",
+            datatype: "json",
+            type: "get",
+            contenttype: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#kills").empty();
+                $(d).each(function () {
+                    var html = "<div class='am-u-sm-3 sale-item'>"+
+                        "<div class='s-img'>" +
+                        "<a  href=''><img onclick='KillImg(" + this.goodsInfoIdOut +")' src='" + this.killInfoImg + "' /></a>" +
+                            "</div>" +
+                        "<div class='s-info'>" +
+                        "<a href='#'><p class='s-title'>快快抢购</p></a>" +
+                        "<div class='s-price'>￥<b>" + this.goodsInfoPrice+"</b>" +
+                        "<div class='ms' style=''>" +
+                        "<form class='layui-form'>" +
+                        "<button type='button'  class='layui-btn layui-btn-disabled'>秒杀</button>" +
+                            "</form>" +
+                            "</div>" +
+                        "<div class='mss' style=''>" +
+                        "<form class='layui-form'>" +
+                        "<button type='button' onclick='Kill(" + this.goodsInfoIdOut +")' class='layui-btn layui-btn-danger'>秒杀</button>" +
+                         "</form>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                        "</div>";
+                    $("#kills").append(html);
+                })
+                //秒杀
+                $(".mss").hide();
+                var timer = setInterval(function () {
+                    var s = (Times % 60) < 10 ? ('0' + Times % 60) : Times % 60;
+                    var h = Times / 3600 < 10 ? ('0' + parseInt(Times / 3600)) : parseInt(Times / 3600);
+                    var m = (Times - h * 3600) / 60 < 10 ? ('0' + parseInt((Times - h * 3600) / 60)) : parseInt((Times - h * 3600) / 60);
+                    $("#shi").text(h);
+                    $("#fen").text(m);
+                    $("#miao").text(s);
+                    if (Times == 0) {
+                        clearTimeout(timer);
+                        $(".ms").hide();
+                        $(".mss").show();
+                    }
+                    Times--;
+                }, 1000)
+            },
+            complete: function () {
+                //热卖初始显示
+                $.ajax({
+                    url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
+                    dataType: "json",
+                    type: "get",
+                    contentType: "application/x-www-form-urlencoded",
+                    success: function (d) {
+                        $("#hotgoods").empty();
+                        $(d).each(function () {
+                            var html = "<li><a onclick='Hot(" + this.goodsInfoId + ")'><img class='hot'   src='" + this.goodsInfoImage + "' /></a></li>";
+                            $("#hotgoods").append(html);
+                        })
+                    },
+                    complete: function () {
+                        //轮播24小时显示
+                        setInterval(function () {
+                            layui.use('carousel', function () {
+                                var carousel = layui.carousel;
+                                $.ajax({
+                                    url: "http://localhost:50519/api/GoodsInfo/GetActibityInfos",
+                                    dataType: "json",
+                                    type: "get",
+                                    contentType: "application/x-www-form-urlencoded",
+                                    success: function (d) {
+                                        $("#lunbo").empty();
+                                        console.log(d);
+                                        $(d).each(function () {
+                                            var html = "<div><a onclick='Lun(" + this.goodsInfoIdOut + ")'><img src='" + this.actibityInfoImg + "' style='width:100%' /></a></div>";
+                                            ids.push(this.actibityInfoId);
+                                            $("#lunbo").append(html);
+                                        })
+                                        //建造实例
+                                        carousel.render({
+                                            elem: '#test1'
+                                            , width: '80%' //设置容器宽度
+                                            , arrow: 'always' //始终显示箭头
+                                            , interval: 2000
+                                            //,anim: 'updown' //切换动画方式
+                                        });
+                                    }
+                                });
+                            });
+                        }, 864000);
+                    }
+                });
+            }
+        }); 
+    }
+    function KillImg(GoodsId) {
+        alert(GoodsId);
+    }
+    function Kill(GoodsId) {
+        alert(GoodsId);
     }
     function Lun(Id) {
         alert(Id);
     }
     $(function () {
         Lunbo();
-        //秒杀
-        $(".mss").hide();
-        var timer = setInterval(function () {
-            var s = (Times % 60) < 10 ? ('0' + Times % 60) : Times % 60;
-            var h = Times / 3600 < 10 ? ('0' + parseInt(Times / 3600)) : parseInt(Times / 3600);
-            var m = (Times - h * 3600) / 60 < 10 ? ('0' + parseInt((Times - h * 3600) / 60)) : parseInt((Times - h * 3600) / 60);
-            $("#shi").text(h);
-            $("#fen").text(m);
-            $("#miao").text(s);
-            if (Times == 0) {
-                clearTimeout(timer);
-                $(".ms").hide();
-                $(".mss").show();
-            }
-            Times--;
-        }, 1000)
+        
         //热卖24小时显示
         setInterval(function () {
             $.ajax({
@@ -397,14 +445,14 @@
                     })
                 }
             });
-        }, 864000);    
+        }, 864000);
     })
     function Hot(GoodsId) {
         alert(GoodsId);
     }
     function Ser() {
         var a = $("#searchInput").val();
-        location.href = "/ShowMasters/SerchGoods?Name="+a;
+        location.href = "/ShowMasters/SerchGoods?Name=" + a;
     }
     function Alist(s) {
         $.ajax({
