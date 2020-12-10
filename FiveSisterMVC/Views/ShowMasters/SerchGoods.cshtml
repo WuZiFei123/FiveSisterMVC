@@ -1,0 +1,272 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>搜索页面</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui-v2.4.5/layui/css/modules/code.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.all.js"></script>
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" />
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" />
+    <link href="~/Content/basic/css/demo.css" rel="stylesheet" />
+    <link href="~/Content/css/seastyle.css" rel="stylesheet" />
+    <script src="~/Content/basic/js/jquery-1.7.min.js"></script>
+    <script src="~/Content/js/script.js"></script>
+</head>
+
+<body>
+
+    <!--顶部导航条 -->
+    <div class="am-container header">
+        <ul class="message-l">
+            <div class="topMessage">
+                <div class="menu-hd">
+                    <a href="#" target="_top" class="h">亲，请登录</a>
+                    <a href="#" target="_top">免费注册</a>
+                </div>
+            </div>
+        </ul>
+        <ul class="message-r">
+            <div class="topMessage home">
+                <div class="menu-hd"><a onclick="Master()" href="#" >商城首页</a></div>
+            </div>
+            <div class="topMessage my-shangcheng">
+                <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+            </div>
+            <div class="topMessage mini-cart">
+                <div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+            </div>
+            <div class="topMessage favorite">
+                <div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+        </ul>
+    </div>
+
+    <!--悬浮搜索框-->
+
+    <div class="nav white">
+        <div class="logo"><img src="~/Content/images/logo.png" /></div>
+        <div class="logoBig">
+            <li><img src="~/Content/images/logobig.png" /></li>
+        </div>
+
+        <div class="search-bar pr">
+            <a name="index_none_header_sysc" href="#"></a>
+            <form>
+                <input id="searchInput" value="@ViewBag.Name" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+                <input id="ai-topsearch" onclick="Serch()" class="submit am-btn" value="搜索"  type="button">
+            </form>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <b class="line"></b>
+    <div class="search">
+        <div class="search-list">
+            <div class="nav-table">
+                <div class="long-title"><span class="all-goods">全部分类</span></div>
+                <div class="nav-cont">
+                    <ul>
+                        <li class="index"><a onclick="Master()" href="#">首页</a></li>
+                        <li class="qc"><a href="#">闪购</a></li>
+                        <li class="qc"><a href="#">限时抢</a></li>
+                        <li class="qc"><a href="#">团购</a></li>
+                        <li class="qc last"><a href="#">大包装</a></li>
+                    </ul>
+                    <div class="nav-extra">
+                        <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+                        <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="am-g am-g-fixed">
+                <div class="am-u-sm-12 am-u-md-12">
+                    <div class="theme-popover">
+                        <div class="searchAbout">
+
+
+                        </div>
+                        <ul class="select">
+                            <p class="title font-normal">
+                                <span class="total fl">搜索到<strong id="nums" class="num">@ViewBag.Num</strong>件相关商品</span>
+                            </p>
+                            <li class="select-result">
+                                <dl>
+                                    <dt>已选</dt>
+                                    <dd class="select-no"></dd>
+                                    <p class="eliminateCriteria">清除</p>
+                                </dl>
+                            </li>
+                            <li class="select-list">
+                                <dl id="select1">
+                                    <dt class="am-badge am-round">品牌</dt>
+
+                                    <div class="dd-conent">
+                                        <dd class="select-all selected"><a href="#">全部</a></dd>
+                                        <dd><a href="#">百草味</a></dd>
+                                        <dd><a href="#">良品铺子</a></dd>
+                                        <dd><a href="#">新农哥</a></dd>
+                                        <dd><a href="#">楼兰蜜语</a></dd>
+                                        <dd><a href="#">口水娃</a></dd>
+                                        <dd><a href="#">考拉兄弟</a></dd>
+                                    </div>
+
+                                </dl>
+                            </li>
+                            <li class="select-list">
+                                <dl id="select2">
+                                    <dt class="am-badge am-round">类型</dt>
+                                    <div class="dd-conent">
+                                        <dd class="select-all selected"><a href="#">全部</a></dd>
+                                        <dd><a href="#">东北松子</a></dd>
+                                        <dd><a href="#">巴西松子</a></dd>
+                                        <dd><a href="#">夏威夷果</a></dd>
+                                        <dd><a href="#">松子</a></dd>
+                                    </div>
+                                </dl>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="search-content">
+                        <div class="sort">
+                            <ul>
+                                <li class="first"><a href="#">综合排序</a></li>
+                                <li><a href="#">销量排序</a></li>
+                                <li><a href="#">价格优先</a></li>
+                                <li class="big"><a href="#">评价为主</a></li>
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+
+                        <ul id="ulls" class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+                            @foreach (var item in ViewBag.list.GoodsInfos)
+                            {
+                                <li>
+                                    <div class="i-pic limit">
+                                        <img src="@item.GoodsInfoImage" />
+                                        <p class="title fl">@item.GoodsInfoDesc</p>
+                                        <p class="price fl">
+                                            <b>¥</b>
+                                            <strong>@item.GoodsInfoPrice</strong>
+                                        </p>
+                                        <p class="number fl">
+                                            销量<span>@item.GoodsInfoCount</span>
+                                        </p>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="search-side">
+
+                        <div class="side-title">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <!--分页 -->
+                    <ul class="am-pagination am-pagination-right">
+                        <li><a href="javascript:First()">首页</a></li>
+                        <li><a href="javascript:Up()">上一页</a></li>
+                        <li><a href="javascript:Next()">下一页</a></li>
+                        <li><a href="javascript:Last()">尾页</a></li>
+                    </ul>
+                </div>
+            </div>
+            <input type="hidden" value="@ViewBag.Name" id="hid" />
+</body>
+</html>
+<script>
+    var PageIndex = 1;
+    var PageSize = 1;
+    var Count = 0;
+    var AllPage = Math.ceil(Count * 1.0 / PageSize);
+    var Name = "";
+    function Serch() {
+        Name = $("#searchInput").val();
+        alert(Name);
+        ShowGoodsPage();
+    }
+    function Next() {
+        Name = $("#searchInput").val();
+        if (PageIndex == AllPage) {
+            layer.open({
+                content: '已经是最后一页了!',
+                anim: 6,
+                isOutAnim: true,
+                success: function (layero, index) {
+
+                }
+            });
+            return;
+        }
+        PageIndex++;
+        ShowGoodsPage();
+    }
+    function First() {
+        Name = $("#searchInput").val();
+        PageIndex = 1;
+        ShowGoodsPage();
+    }
+    function Last() {
+        Name = $("#searchInput").val();
+        PageIndex = AllPage;
+        ShowGoodsPage();
+    }
+    function Up() {
+        Name = $("#searchInput").val();
+        if (PageIndex == 1) {
+            layer.open({
+                content: '已经是第一页了!',
+                anim: 6,
+                isOutAnim: true,
+                success: function (layero, index) {
+
+                }
+            });
+            return;
+        }
+        PageIndex--;
+        ShowGoodsPage();
+    }
+    function ShowGoodsPage() {
+        $.ajax({
+            url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfosPage",
+            dataType: "json",
+            type: "get",
+            data: { PageIndex: PageIndex, Name:Name },
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                Count = d.count;
+                $("#nums").text(d.count);
+                AllPage = Math.ceil(Count * 1.0 / PageSize);
+                $("#ulls").empty();
+                $(d.goodsInfos).each(function () {
+                    var html = "<li>" +
+                        "<div class='i-pic limit'>" +
+                        "<img  onclick='GoodsLook(" + this.goodsInfoId + ")' style='width:218px; height:260px;' src='" + this.goodsInfoImage + "'/>" +
+                        "<p class='title fl'>" + this.goodsInfoDesc + "</p>" +
+                        "<p class='price fl'>" +
+                        "<b>¥</b><strong>" + this.goodsInfoPrice + "</strong>" +
+                        "</p><p class='number fl'>销量<span>" + this.goodsInfoCount + "</span>" +
+                        "</p></div></li>";
+                    $("#ulls").append(html);
+
+                })
+            }
+        });
+    }
+    function GoodsLook(GoodsId) {
+        alert(GoodsId);
+    }
+    function Master() {
+        location.href = "/ShowMasters/ShowMaster";
+    }
+</script>

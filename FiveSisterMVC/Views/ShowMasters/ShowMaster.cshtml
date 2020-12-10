@@ -1,0 +1,348 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>五姐妹购物平台</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" />
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" />
+    <link href="~/Content/basic/css/demo.css" rel="stylesheet" />
+    <link href="~/Content/css/hmstyle.css" rel="stylesheet" />
+    <script src="~/Content/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+    <script src="~/Content/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+</head>
+<body>
+    <div class="hmtop">
+        <!--顶部导航条 -->
+        <div class="am-container header">
+            <ul class="message-l">
+                <div class="topMessage">
+                    <div class="menu-hd">
+                        <a href="#" target="_top" class="h">亲，请登录</a>
+                        <a href="#" target="_top">免费注册</a>
+                    </div>
+                </div>
+            </ul>
+            <!--个人收藏-->
+            <ul class="message-r">
+                <div class="topMessage home">
+                    <div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+                </div>
+                <div class="topMessage my-shangcheng">
+                    <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                </div>
+                <div class="topMessage mini-cart">
+                    <div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>我的购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+                </div>
+                <div class="topMessage favorite">
+                    <div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>商品收藏</span></a></div>
+            </ul>
+        </div>
+        <!--悬浮搜索框-->
+        <div class="nav white">
+            <div class="logo"><img src="~/Content/images/logo.png" /></div>
+            <div class="logoBig">
+                <li><img src="~/Content/231.png" /></li>
+            </div>
+            <div class="search-bar pr">
+                <form>
+                    <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" >
+                    <input id="ai-topsearch" class="submit am-btn" onclick="Ser()" value="搜索">
+                </form>
+            </div>
+        </div>
+    </div>
+    <b class="line"></b>
+    <div class="shopNav">
+        <div class="slideall" style="height: auto;">
+            <div class="long-title"><span class="all-goods">全部分类</span></div>
+            <div class="nav-cont">
+                <ul>
+                    <li class="index"><a href="#">首页</a></li>
+                    <li class="qc"><a href="#">闪购</a></li>
+                    <li class="qc"><a href="#">限时抢</a></li>
+                    <li class="qc"><a href="#">团购</a></li>
+                    <li class="qc last"><a href="#">大包装</a></li>
+                </ul>
+                <div class="nav-extra">
+                    <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>去领优惠券
+                    <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+                </div>
+            </div>
+
+            <div class="bannerTwo">
+                <!--轮播 -->
+                <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+                    <ul class="am-slides">
+                        <li class="banner1"><a><img src="~/Content/images/ad5.jpg"  /></a></li>
+                        <li class="banner2"><a><img src="~/Content/images/ad6.jpg" /></a></li>
+                        <li class="banner3"><a><img src="~/Content/images/ad7.jpg" /></a></li>
+                        <li class="banner4"><a><img src="~/Content/images/ad8.jpg" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--侧边类型导航 -->
+            <div id="nav" class="navfull" style="position: static;">
+                <div class="area clearfix">
+                    <div class="category-content" id="guide_2">
+                        <div class="category" style="box-shadow:none ;margin-top: 2px;">
+                            <ul class="category-list navTwo" id="js_climit_li">
+                                @foreach (var item in ViewBag.Father)
+                                {
+                                <li>
+                                        <div class="category-info">
+                                            <h3 class="category-name b-category-name"><a onclick="Alist(@item.ClothesTypeId)"  href="#" class="ml-22" >@item.ClothesTypeName</a></h3>
+                                            <em>&gt;</em>
+                                        </div>
+                                        <div class="menu-item menu-in top">
+                                            <div class="area-in">
+                                                <div class="area-bg">
+                                                    <div class="menu-srot">
+                                                        <div class="sort-side">
+                                                            <dl class="dl-sort">
+                                                                @foreach (var m in ViewBag.Alist)
+                                                                {
+                                                                    if (m.ClothesTypePid == item.ClothesTypeId)
+                                                                    {
+                                                                        <dd><a onclick="Alist(@m.ClothesTypeId)" href="#"><span class="red">@m.ClothesTypeName</span></a></dd>
+                                                                    }
+                                                                }
+                                                            </dl>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <b class="arrow"></b>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--导航 -->
+            <script type="text/javascript">
+                (function () {
+                    $('.am-slider').flexslider();
+                });
+                $(document).ready(function () {
+                    $("li").hover(function () {
+                        $(".category-content .category-list li.first .menu-in").css("display", "none");
+                        $(".category-content .category-list li.first").removeClass("hover");
+                        $(this).addClass("hover");
+                        $(this).children("div.menu-in").css("display", "block")
+                    }, function () {
+                        $(this).removeClass("hover")
+                        $(this).children("div.menu-in").css("display", "none")
+                    });
+                })
+            </script>
+            <!--昨日热卖-->
+            <div class="row">
+                <ul id="hotgoods">
+                    @*<li><a onclick=''><img src="~/Content/images/row1.jpg" /></a></li>
+                    <li><a><img  src="~/Content/images/row2.jpg" /></a></li>
+                    <li><a><img src="~/Content/images/row3.jpg" /></a></li>
+                    <li><a><img src="~/Content/images/row4.jpg" /></a></li>*@
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <!--商城公告-->
+            <div class="marqueenTwo">
+                <span class="marqueen-title"><i class="am-icon-volume-up am-icon-fw"></i>商城头条<em class="am-icon-angle-double-right"></em></span>
+                <div class="demo">
+                    <ul>
+                        <li class="title-first">
+                            <a target="_blank" href="#">
+                                <img src="../images/TJ2.jpg"></img>
+                                <span>[特惠]</span>洋河年末大促，低至两件五折
+                            </a>
+                        </li>
+                        <li class="title-first">
+                            <a target="_blank" href="#">
+                                <span>[公告]</span>商城与广州市签署战略合作协议
+                                <img src="../images/TJ.jpg"></img>
+                                <p>XXXXXXXXXXXXXXXXXX</p>
+                            </a>
+                        </li>
+                        <li><a target="_blank" href="#"><span>[特惠]</span>女生节商城爆品1分秒	</a></li>
+                        <li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
+                        <li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
+                        <li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
+                        <li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
+                    </ul>
+                </div>
+            </div>
+            <script type="text/javascript">
+            if ($(window).width() < 640) {
+                function autoScroll(obj) {
+                    $(obj).find("ul").animate({
+                        marginTop: "-39px"
+                    }, 500, function () {
+                        $(this).css({
+                            marginTop: "0px"
+                        }).find("li:first").appendTo(this);
+                    })
+                }
+                $(function () {
+                    setInterval('autoScroll(".demo")', 3000);
+                })
+            }
+            </script>
+        </div>
+        <!--秒杀-->
+        <div class="am-container">
+            <div class="sale-mt">
+                <i></i>
+                <em class="sale-title">限时秒杀</em>
+                <div class="s-time" id="countdown">
+                    <span id="shi" class="hh">00</span>
+                    <span id="fen" class="mm">00</span>
+                    <span id="miao" class="ss">00</span>
+                </div>
+            </div>
+            <div class="am-g am-g-fixed sale">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <div class="am-u-sm-3 sale-item">
+                        <div class="s-img">
+                            <a href="# "><img src="~/Content/images/sale3.jpg" /></a>
+                        </div>
+                        <div class="s-info">
+                            <a href="#"><p class="s-title">ZEK 原味海苔</p></a>
+                            <div class="s-price">
+                                ￥<b>9.90</b>
+                                <div class="ms" style="">
+                                    <form class="layui-form">
+                                        <button type="button" class="layui-btn layui-btn-disabled">秒杀</button>
+                                    </form>
+                                </div>
+                                <div class="mss" style="">
+                                    <form class="layui-form">
+                                        <button type="button" class="layui-btn layui-btn-danger">秒杀</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <script>
+            //Demo
+            layui.use('form', function () {
+                var form = layui.form;
+
+                //监听提交
+                form.on('submit(formDemo)', function (data) {
+                    layer.msg(JSON.stringify(data.field));
+                    return false;
+                });
+            });
+        </script>
+        <style>
+            .ms {
+                width: 68px;
+                height: 40px;
+                border-width:1px;
+                margin-top: -36px;
+                margin-left: 183px;
+                background-color: white;
+                text-align:center;
+                color:black;
+            }
+            .mss {
+                width: 68px;
+                height: 40px;
+                border-width: 1px;
+                margin-top: -36px;
+                margin-left: 183px;
+                background-color: white;
+                text-align: center;
+            }
+            .hot {
+                width:250px;
+                height:210px;
+
+            }
+        </style>
+</body>
+</html>
+<script>
+    var Times = 5;
+    var Shi = 0;
+    var Fen = 0;
+    var Miao = 0;
+    $(function () { 
+            $.ajax({
+                url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
+                dataType: "json",
+                type: "get",
+                contentType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    $("#hotgoods").empty();
+                    $(d).each(function () {
+                        var html = "<li><a onclick='Hot(" + this.goodsInfoId + ")'><img class='hot'  src='" + this.goodsInfoImage + "' /></a></li>";
+                        $("#hotgoods").append(html);
+                    })
+                }
+            });
+        $(".mss").hide();
+        var timer = setInterval(function () {
+            var s = (Times % 60) < 10 ? ('0' + Times % 60) : Times % 60;
+            var h = Times / 3600 < 10 ? ('0' + parseInt(Times / 3600)) : parseInt(Times / 3600);
+            var m = (Times - h * 3600) / 60 < 10 ? ('0' + parseInt((Times - h * 3600) / 60)) : parseInt((Times - h * 3600) / 60);
+            $("#shi").text(h);
+            $("#fen").text(m);
+            $("#miao").text(s);
+            if (Times == 0) {
+                clearTimeout(timer);
+                $(".ms").hide();
+                $(".mss").show();
+            }
+            Times--;
+        }, 1000)
+        setInterval(function () {
+            $.ajax({
+                url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
+                dataType: "json",
+                type: "get",
+                contentType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    $("#hotgoods").empty();
+                    $(d).each(function () {
+                        var html = "<li><a onclick='Hot(" + this.goodsInfoId + ")'><img class='hot'  src='" + this.goodsInfoImage + "' /></a></li>";
+                        $("#hotgoods").append(html);
+                    })
+                }
+            });
+        },864000);
+    })
+    function Hot(GoodsId) {
+        alert(GoodsId);
+    }
+    function Ser() {
+        var a = $("#searchInput").val();
+        location.href = "/ShowMasters/SerchGoods?Name="+a;
+    }
+    function Alist(s) {
+        $.ajax({
+            url: "http://localhost:50519/api/FiveSister/GetClothesTypes?TypeId=" + s,
+            dataType: "json",
+            type: "get",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                location.href = "/ShowMasters/SerchGoods?Types=" + d[0].clothesTypeName;
+            }
+        });
+    }
+</script>
