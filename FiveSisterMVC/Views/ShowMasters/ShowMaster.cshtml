@@ -77,16 +77,11 @@
                     <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
                 </div>
             </div>
-
-            <div class="bannerTwo">
-                <!--轮播 -->
-                <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-                    <ul class="am-slides">
-                        <li class="banner1"><a><img src="~/Content/images/ad5.jpg"  /></a></li>
-                        <li class="banner2"><a><img src="~/Content/images/ad6.jpg" /></a></li>
-                        <li class="banner3"><a><img src="~/Content/images/ad7.jpg" /></a></li>
-                        <li class="banner4"><a><img src="~/Content/images/ad8.jpg" /></a></li>
-                    </ul>
+            <!--轮播-->
+            <div class="bannerTwo" style="margin:0 auto;width:79%;height:280px;">
+                <div class="layui-carousel"  id="test1" >
+                    <div carousel-item=carousel-item id="lunbo">
+                    </div>
                 </div>
             </div>
             <!--侧边类型导航 -->
@@ -97,9 +92,9 @@
                             <ul class="category-list navTwo" id="js_climit_li">
                                 @foreach (var item in ViewBag.Father)
                                 {
-                                <li>
+                                    <li>
                                         <div class="category-info">
-                                            <h3 class="category-name b-category-name"><a onclick="Alist(@item.ClothesTypeId)"  href="#" class="ml-22" >@item.ClothesTypeName</a></h3>
+                                            <h3 class="category-name b-category-name"><a onclick="Alist(@item.ClothesTypeId)" href="#" class="ml-22">@item.ClothesTypeName</a></h3>
                                             <em>&gt;</em>
                                         </div>
                                         <div class="menu-item menu-in top">
@@ -150,9 +145,9 @@
             <div class="row">
                 <ul id="hotgoods">
                     @*<li><a onclick=''><img src="~/Content/images/row1.jpg" /></a></li>
-                    <li><a><img  src="~/Content/images/row2.jpg" /></a></li>
-                    <li><a><img src="~/Content/images/row3.jpg" /></a></li>
-                    <li><a><img src="~/Content/images/row4.jpg" /></a></li>*@
+                <li><a><img  src="~/Content/images/row2.jpg" /></a></li>
+                <li><a><img src="~/Content/images/row3.jpg" /></a></li>
+                <li><a><img src="~/Content/images/row4.jpg" /></a></li>*@
                 </ul>
             </div>
             <div class="clear"></div>
@@ -163,14 +158,14 @@
                     <ul>
                         <li class="title-first">
                             <a target="_blank" href="#">
-                                <img src="../images/TJ2.jpg"></img>
+                                <img src="../images/TJ2.jpg" /></img>
                                 <span>[特惠]</span>洋河年末大促，低至两件五折
                             </a>
                         </li>
                         <li class="title-first">
                             <a target="_blank" href="#">
                                 <span>[公告]</span>商城与广州市签署战略合作协议
-                                <img src="../images/TJ.jpg"></img>
+                                <img src="../images/TJ.jpg" /></img>
                                 <p>XXXXXXXXXXXXXXXXXX</p>
                             </a>
                         </li>
@@ -183,20 +178,20 @@
                 </div>
             </div>
             <script type="text/javascript">
-            if ($(window).width() < 640) {
-                function autoScroll(obj) {
-                    $(obj).find("ul").animate({
-                        marginTop: "-39px"
-                    }, 500, function () {
-                        $(this).css({
-                            marginTop: "0px"
-                        }).find("li:first").appendTo(this);
+                if ($(window).width() < 640) {
+                    function autoScroll(obj) {
+                        $(obj).find("ul").animate({
+                            marginTop: "-39px"
+                        }, 500, function () {
+                            $(this).css({
+                                marginTop: "0px"
+                            }).find("li:first").appendTo(this);
+                        })
+                    }
+                    $(function () {
+                        setInterval('autoScroll(".demo")', 3000);
                     })
                 }
-                $(function () {
-                    setInterval('autoScroll(".demo")', 3000);
-                })
-            }
             </script>
         </div>
         <!--秒杀-->
@@ -272,7 +267,6 @@
             .hot {
                 width:250px;
                 height:210px;
-
             }
         </style>
 </body>
@@ -282,20 +276,97 @@
     var Shi = 0;
     var Fen = 0;
     var Miao = 0;
-    $(function () { 
-            $.ajax({
-                url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
-                dataType: "json",
-                type: "get",
-                contentType: "application/x-www-form-urlencoded",
-                success: function (d) {
-                    $("#hotgoods").empty();
-                    $(d).each(function () {
-                        var html = "<li><a onclick='Hot(" + this.goodsInfoId + ")'><img class='hot'  src='" + this.goodsInfoImage + "' /></a></li>";
-                        $("#hotgoods").append(html);
-                    })
-                }
-            });
+    var ids = [];
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        $.ajax({
+            url: "http://localhost:50519/api/GoodsInfo/GetActibityInfos",
+            dataType: "json",
+            type: "get",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#lunbo").empty();
+                console.log(d);
+                $(d).each(function () {
+                    var html = "<div><a onclick='Lun(" + this.goodsInfoIdOut + ")'><img src='" + this.actibityInfoImg + "' style='width:100%' /></a></div>";
+                    ids.push(this.actibityInfoId);
+                    $("#lunbo").append(html);
+                })
+                //建造实例
+                carousel.render({
+                    elem: '#test1'
+                    , width: '80%' //设置容器宽度
+                    , arrow: 'always' //始终显示箭头
+                    , interval: 2000
+                    //,anim: 'updown' //切换动画方式
+                });
+            },
+            complete: function () {
+                //$.ajax({
+                //    url: "http://localhost:50519/api/goodsinfo/updateactibityinfosbyids?ids=" + ids.toString(),
+                //    datatype: "json",
+                //    type: "get",
+                //    contenttype: "application/x-www-form-urlencoded",
+                //    success: function (d) {
+                        
+                //    }
+                //});
+            } 
+        });     
+    });
+    function Lunbo() {
+        //热卖初始显示
+        $.ajax({
+            url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
+            dataType: "json",
+            type: "get",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#hotgoods").empty();
+                $(d).each(function () {
+                    var html = "<li><a onclick='Hot(" + this.goodsInfoId + ")'><img class='hot'   src='" + this.goodsInfoImage + "' /></a></li>";
+                    $("#hotgoods").append(html);
+                })
+            },
+            complete: function () {
+                //轮播24小时显示
+                setInterval(function () {
+                    layui.use('carousel', function () {
+                        var carousel = layui.carousel;
+                        $.ajax({
+                            url: "http://localhost:50519/api/GoodsInfo/GetActibityInfos",
+                            dataType: "json",
+                            type: "get",
+                            contentType: "application/x-www-form-urlencoded",
+                            success: function (d) {
+                                $("#lunbo").empty();
+                                console.log(d);
+                                $(d).each(function () {
+                                    var html = "<div><a onclick='Lun(" + this.goodsInfoIdOut + ")'><img src='" + this.actibityInfoImg + "' style='width:100%' /></a></div>";
+                                    ids.push(this.actibityInfoId);
+                                    $("#lunbo").append(html);
+                                })
+                                //建造实例
+                                carousel.render({
+                                    elem: '#test1'
+                                    , width: '80%' //设置容器宽度
+                                    , arrow: 'always' //始终显示箭头
+                                    , interval: 2000
+                                    //,anim: 'updown' //切换动画方式
+                                });
+                            }
+                        });
+                    });
+                },864000);
+            }
+        });
+    }
+    function Lun(Id) {
+        alert(Id);
+    }
+    $(function () {
+        Lunbo();
+        //秒杀
         $(".mss").hide();
         var timer = setInterval(function () {
             var s = (Times % 60) < 10 ? ('0' + Times % 60) : Times % 60;
@@ -311,6 +382,7 @@
             }
             Times--;
         }, 1000)
+        //热卖24小时显示
         setInterval(function () {
             $.ajax({
                 url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
@@ -325,7 +397,7 @@
                     })
                 }
             });
-        },864000);
+        }, 864000);    
     })
     function Hot(GoodsId) {
         alert(GoodsId);
