@@ -87,10 +87,6 @@ namespace FiveSisterMVC.Controllers
             }
             return "";
         }
-        public IActionResult aaa()
-        {
-            return View();
-        }
         /// <summary>
         /// 显示主页面
         /// </summary>
