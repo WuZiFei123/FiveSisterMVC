@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\..\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
   </ItemGroup>
 
