@@ -116,5 +116,9 @@ namespace FiveSisterMVC.Controllers
             ViewBag.list = li;
             return View();
         }
+        public IActionResult GoodsAddCollect()
+        {
+            return View();
+        }
     }
 }
