@@ -104,7 +104,14 @@ namespace FiveSisterMVC.Controllers
         {
             string list = GetGoodsInfo("get", "GetGoodsInfosPage?Name="+Name+"&Types="+Types);
             GoodsInfo_PageList li = JsonConvert.DeserializeObject<GoodsInfo_PageList>(list);
-            ViewBag.Name = Name;
+            if(Name!="")
+            {
+                ViewBag.Name = Name;
+            }
+            if (Types != "")
+            {
+                ViewBag.Name = Types;
+            }
             ViewBag.Num = li.Count;
             ViewBag.list = li;
             return View();
