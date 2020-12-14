@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" />
+    <link href="~/Content/css/dlstyle.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+</head>
+
+<body>
+
+    <div class="login-boxtitle">
+        <a href="home/demo.html"><img alt="" src="../Imagess/logobig.png" /></a>
+    </div>
+
+    <div class="res-banner" style="height:750Px">
+        <div class="res-main">
+            <div class="login-banner-bg"><span></span><img src="../Imagess/big.jpg" /></div>
+            <div class="login-box" style="height:700Px">
+
+                <div class="am-tabs" id="doc-my-tabs">
+                    <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+                        <li class="am-active"><a href="">邮箱注册</a></li>
+                        <li class="am-active"><a href="">手机号注册</a></li>
+                    </ul>
+
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-active">
+                            <form method="post">
+                                <div class="user-pass" id="editPwdwindow" class2="eosyui-window" title="修改密码" style="width:300px;height:160px;padding:5px; background:#fafafa">
+                                    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                    <input type="password" name="" id="Pass" placeholder="新密码" class="txt@1">
+                                 
+                                </div>
+                                <div class="user-pass">
+                                    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                    <input type="password" name="" id="quePass" placeholder="确认密码" class="txt@1">
+                                    <a href="javascript" class="btn blue changePass"
+                                       type="small" class1="fa-edit" onclick="xiugai('${user[0]}')">修改密码</a>
+                                </div>
+                            </form>
+                            <div class="login-links">
+                                <label for="reader-me">
+                                    <input id="check" type="checkbox"> 点击表示您同意商城《服务协议》
+                                </label>
+                            </div>
+                            <div class="am-cf">
+                                <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl" onclick="Zhu()">
+                            </div>
+                        </div>
+
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function Update() {
+        if (Pass != quePass) {
+            alert("重置失败");
+        }
+        else {
+            alert("重置成功");
+        }
+        $.ajax({
+            url: "http://localhost:50519/api/GoodsUserInfo/Update",
+            type: "post",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert("重置成功");
+                    location.href = "/UserInfo/Login";
+                }
+                else {
+                    alert("重置失败");
+                }
+            }
+        })
+    }
+</script>
+
+

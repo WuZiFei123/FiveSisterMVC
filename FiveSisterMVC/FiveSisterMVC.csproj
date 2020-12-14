@@ -10,8 +10,10 @@
 
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\..\..\..\Desktop\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

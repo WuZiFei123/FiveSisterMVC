@@ -1,0 +1,233 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <title>Index</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <script src="~/js/site.js"></script>
+
+    <style>
+
+        body {
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-style: initial;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans',sans-serif;
+            margin: 0;
+            background-color: #FA6F03;
+        }
+
+        #login {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -150px;
+            width: 300px;
+            height: 300px;
+        }
+
+            #login h1 {
+                color: #fff;
+                text-shadow: 0 0 10px;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+
+        h1 {
+            font-size: 2em;
+            margin: 0.67em 0;
+        }
+
+        input {
+            width: 278px;
+            height: 18px;
+            margin-bottom: 10px;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px;
+            border-top: 1px solid #312E3D;
+            border-left: 1px solid #312E3D;
+            border-right: 1px solid #312E3D;
+            border-bottom: 1px solid #56536A;
+            border-radius: 4px;
+            background-color: skyblue;
+        }
+
+        .but {
+            width: 300px;
+            min-height: 20px;
+            display: block;
+            background-color: skyblue;
+            border: 1px solid #3762bc;
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            border-radius: 5px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="home/demo.html"><img alt="" src="../Imagess/logobig.png" /></a>
+    <center>
+        <h1 style="margin-top:40px;font-size:48px">五姐妹购物中心</h1>
+    </center>
+
+    <div style="margin:0 auto;width:600px;height:700px;border-radius:10px;background:rgba(255,255,255,.6)">
+        <div style="margin: 40px 150px;padding: 26px 0"><input type="text" required="required" id="Uname" placeholder="用户名" class="input" style="border:0;height:33px;border-radius:5px;min-width:300px;padding-left:10px" /></div>
+        <div style="margin: 10px 150px"><input type="password" id="Upass" required="required" placeholder="密码" class="input" style="border: 0; height: 33px; border-radius: 5px; min-width: 300px; padding-left: 10px " /></div>
+
+        <div style="margin: 20px 150px"><span style="font-size:24px">验证码</span> <canvas id="canvas" width="120" height="40" style="background-color:white;margin-top:15px"></canvas></div>
+        <div style="margin: 20px 150px"><span style="font-size:24px">请输入验证码 <input type="text" id="text" style="border:0;height:35px;border-radius:5px;min-width:150px;padding-left:10px;margin-top:10px"></span></div>
+        <div style="margin: 20px 150px; ">
+            <input id="Button1" class="" type="button" value="登录" style="margin-top:10px;border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
+        </div>
+        <div style="margin: 20px 150px">
+            <span>
+                没有账号？请点击<input id="Button2" type="button" class="but" value="注册" onclick="Zhu()" style="margin-left: 3px; border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
+                <input id="Button3" type="button" value="找回密码" class="but" onclick="zhao()" style="margin-left: 3px; border: 0; height: 40px;margin-top:20px; border-radius: 5px; min-width: 100px; padding-left: 10px;font-size:18px" />
+            </span>
+        </div>
+
+        <div style="margin: 20px 150px"><center><p style="color:#FA6F03;"><span onclick="lian()">登录遇到问题，点击此处</span></p></center></div>
+    </div>
+
+
+</body>
+</html>
+<script>
+    var canvas = document.getElementById("canvas");//演员
+    var context = canvas.getContext("2d");//舞台，getContext() 方法可返回一个对象，该对象提供了用于在画布上绘图的方法和属性。
+    var button = document.getElementById("bt");//获取按钮
+    var input = document.getElementById("text");//获取输入框
+    draw();
+    canvas.onclick = function () {
+        context.clearRect(0, 0, 120, 40);//在给定的矩形内清除指定的像素
+        draw();
+    }
+    // 随机颜色函数
+    function getColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+    function draw() {
+        context.strokeRect(0, 0, 120, 40);//绘制矩形（无填充）
+        var aCode = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+        // 绘制字母
+        var arr = [] //定义一个数组用来接收产生的随机数
+        var num //定义容器接收验证码
+        for (var i = 0; i < 4; i++) {
+            var x = 20 + i * 20;//每个字母之间间隔20
+            var y = 20 + 10 * Math.random();//y轴方向位置为20-30随机
+            var index = Math.floor(Math.random() * aCode.length);//随机索引值
+            var txt = aCode[index];
+            context.font = "bold 20px 微软雅黑";//设置或返回文本内容的当前字体属性
+            context.fillStyle = getColor();//设置或返回用于填充绘画的颜色、渐变或模式，随机
+            context.translate(x, y);//重新映射画布上的 (0,0) 位置，字母不可以旋转移动，所以移动容器
+            var deg = 90 * Math.random() * Math.PI / 180;//0-90度随机旋转
+            context.rotate(deg);// 	旋转当前绘图
+            context.fillText(txt, 0, 0);//在画布上绘制“被填充的”文本
+            context.rotate(-deg);//将画布旋转回初始状态
+            context.translate(-x, -y);//将画布移动回初始状态
+            arr[i] = txt //接收产生的随机数
+        }
+        num = arr[0] + arr[1] + arr[2] + arr[3] //将产生的验证码放入num
+        // 绘制干扰线条
+        for (var i = 0; i < 8; i++) {
+            context.beginPath();//起始一条路径，或重置当前路径
+            context.moveTo(Math.random() * 120, Math.random() * 40);//把路径移动到画布中的随机点，不创建线条
+            context.lineTo(Math.random() * 120, Math.random() * 40);//添加一个新点，然后在画布中创建从该点到最后指定点的线条
+            context.strokeStyle = getColor();//随机线条颜色
+            context.stroke();// 	绘制已定义的路径
+        }
+        // 绘制干扰点，和上述步骤一样，此处用长度为1的线代替点
+        for (var i = 0; i < 20; i++) {
+            context.beginPath();
+            var x = Math.random() * 120;
+            var y = Math.random() * 40;
+            context.moveTo(x, y);
+            context.lineTo(x + 1, y + 1);
+            context.strokeStyle = getColor();
+            context.stroke();
+        }
+
+        //点击按钮验证
+        document.getElementById("Button1").onclick = function () {
+            var text = input.value //获取输入框的值
+            //var UserInfoName = $("#Uname").val();
+            //var UserInfoPass = $("#Upass").val();
+            var name = $("#name").val();
+            var pwd = $("#pass").val();
+            if (text === num) {
+                $.ajax({
+                    url: "http://localhost:50519/api/GoodsUserInfo/GetUserInfos?name=" + name + "&pass=" + pwd,
+                    type: "get",
+                    //data: { uname: Uname, Upass: Upass },
+                    dataType: "json",
+                    success: function (d) {
+                        if (d != null) {
+                            alert("登录成功");
+                            ////跳用户界面
+                            //sessionStorage.setItem("Uname", d.uname);
+                            //sessionStorage.setItem("Upass", d.upass);
+                            //sessionStorage.setItem("Qma", d.qma);
+                            //sessionStorage.setItem("Rname", d.rname);
+                            //sessionStorage.setItem("Uid", d.uid);
+                            //location.href = "/UserInfo/Index";
+                            //return;
+                        }
+                        else {
+                            alert("登陆失败！");
+                            location.href = "/UserInfo/Login";
+                        }
+                    }
+
+                })
+
+
+            } else {
+                alert('验证失败')
+            }
+        }
+    }
+    //注册按钮
+    function Zhu() {
+        location.href = "/UserInfo/Zhu";
+
+    }
+    function Update() {
+        var UserInfoName = $("#name").val();
+        if (UserInfoName == "") {
+            alert("请输入用户名");
+            return;
+        }
+        location.href = "/UserInfo/Update?Uname=" + Uname;
+
+    }
+</script>
+
+

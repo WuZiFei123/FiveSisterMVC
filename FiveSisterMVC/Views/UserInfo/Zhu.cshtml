@@ -1,0 +1,134 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" />
+    <link href="~/Content/css/dlstyle.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    
+</head>
+
+<body>
+
+    <div class="login-boxtitle">
+        <a href="home/demo.html"><img alt="" src="../Imagess/logobig.png" /></a>
+    </div>
+
+    <div class="res-banner" style="height:750Px">
+        <div class="res-main">
+            <div class="login-banner-bg"><span></span><img src="../Imagess/big.jpg" /></div>
+            <div class="login-box" style="height:700Px">
+
+                <div class="am-tabs" id="doc-my-tabs">
+                    <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+                        <li class="am-active"><a href="">邮箱注册</a></li>
+                        <li class="am-active"><a href="">手机号注册</a></li>
+                    </ul>
+
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-active">
+                            <form method="post">
+
+                                <div class="user-email">
+                                    <label for="email"><i class="am-icon-envelope-o"></i></label>
+                                    <input type="email" name="" id="Name" placeholder="请输入账号">
+                                </div>
+                                <div class="user-pass">
+                                    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                    <input type="password" name="" id="Pass" placeholder="设置密码">
+                                </div>
+                                <div class="user-pass">
+                                    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                    <input type="password" name="" id="quePass" placeholder="确认密码">
+                                </div>
+                                <div class="user-email">
+                                    <label for="email"><i class="am-icon-envelope-o"></i></label>
+                                    <input type="email" name="" id="Sex" placeholder="用户性别">
+                                </div>
+                                <div class="user-pass">
+                                    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+                                    <input type="password" name="" id="Letter" placeholder="密保">
+                                </div>
+                                <div class="user-email">
+                                    <label for="email"><i class="am-icon-envelope-o"></i></label>
+                                    <input type="email" name="" id="Take" placeholder="收货地址">
+                                </div>
+                                <div class="user-email">
+                                    <label for="email"><i class="am-icon-envelope-o"></i></label>
+                                    <input type="email" name="" id="Phone" placeholder="手机号">
+                                </div>
+                                <div class="user-email">
+                                    <label for="email"><i class="am-icon-envelope-o"></i></label>
+                                    <input type="email" name="" id="Emil" placeholder="输入邮箱">
+                                </div>
+                                <div class="user-email">
+                                    <label for="email"><i class="am-icon-envelope-o"></i></label>
+                                    <input type="email" name="" id="img" placeholder="头像">
+                                </div>
+                            </form>
+
+                            <div class="login-links">
+                                <label for="reader-me">
+                                    <input id="check" type="checkbox"> 点击表示您同意商城《服务协议》
+                                </label>
+                            </div>
+                            <div class="am-cf">
+                                <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl" onclick="Zhu()">
+                            </div>
+
+                        </div>
+
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+<script>
+    function Zhu() {
+        if ($("#check").prop("checked")) {
+            var obj = {
+                UserInfoName: $("#Name").val(),
+                UserInfoPass: $("#Pass").val(),
+                UserInfoSex: $("#Sex").val(),
+                UserInfoLetter: $("#Letter").val(),
+                UserInfoTake: $("#Take").val(),
+                UserInfoPhone: $("#Phone").val(),
+                UserInfoEmil: $("#Emil").val(),
+                UserInfoHead: $("#img").val()
+            };
+            $.ajax({
+                url: "http://localhost:50519/api/GoodsUserInfo/GetZhu",
+                type: "post",
+                dataType: "json",
+                data: obj,
+                contentType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    if (d > 0) {
+                        alert("注册成功");
+                        location.href = "/UserInfo/Login";
+                    }
+                }
+            })        }
+        else {
+            alert("请先勾选协议");
+            return;
+        }
+    }
+</script>
+

@@ -23,7 +23,7 @@ namespace FiveSisterMVC.Controllers
         public string GetApi(string retype, string actionname, object obj = null)
         {
             HttpClient hc = new HttpClient();
-            hc.BaseAddress = new Uri("http://localhost:50519/api/FiveSister/");
+            hc.BaseAddress = new Uri("http://localhost:50519/api/1/");
             Task<HttpResponseMessage> task = null;
             switch (retype)
             {
