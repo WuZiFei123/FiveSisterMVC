@@ -8,13 +8,14 @@ namespace FiveSisterMVC.Controllers
 {
     public class PersonalController : Controller
     {
-        public ActionResult SingePersonalCenter(int userInfoId=0)
+        public ActionResult SingePersonalCenter(int userInfoId = 1)
         {
             ViewBag.userInfoId = userInfoId;
             return View();
         }
-        public ActionResult Place()
+        public ActionResult Place(int userInfoId = 1)
         {
+            ViewBag.userInfoId = userInfoId;
             return View();
         }
     }
