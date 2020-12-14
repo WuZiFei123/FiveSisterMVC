@@ -18,6 +18,11 @@
     <script src="~/Content/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
+
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
 <body>
     <div class="hmtop">
@@ -43,7 +48,7 @@
                     <div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>我的购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
                 </div>
                 <div class="topMessage favorite">
-                    <div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>商品收藏</span></a></div>
+                    <div class="menu-hd"><a href="javascript:location.href='/ShowMasters/GoodsAddCollect'" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>商品收藏</span></a></div>
                 </div>
             </ul>
         </div>
@@ -68,13 +73,9 @@
             <div class="nav-cont">
                 <ul>
                     <li class="index"><a href="#">首页</a></li>
-                    <li class="qc"><a href="#">闪购</a></li>
-                    <li class="qc"><a href="#">限时抢</a></li>
-                    <li class="qc"><a href="#">团购</a></li>
-                    <li class="qc last"><a href="#">大包装</a></li>
                 </ul>
                 <div class="nav-extra">
-                    <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>去领优惠券
+                    <a href="javascript:location.href='/ShowMasters/DisCount'"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>去领优惠券</a>
                     <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
                 </div>
             </div>
@@ -153,7 +154,7 @@
             </div>
             <div class="clear"></div>
             <!--商城公告-->
-            <div class="marqueenTwo">
+            <div class="marqueenTwo" style="height:280px;">
                 <span class="marqueen-title"><i class="am-icon-volume-up am-icon-fw"></i>商城头条<em class="am-icon-angle-double-right"></em></span>
                 <div class="demo">
                     <ul>
@@ -271,7 +272,7 @@
 
             .hot {
                 width: 250px;
-                height: 210px;
+                height: 215px;
             }
         </style>
     </div>
@@ -283,6 +284,7 @@
     var Fen = 0;
     var Miao = 0;
     var ids = [];
+    //轮播初始显示
     layui.use('carousel', function () {
         var carousel = layui.carousel;
         $.ajax({
@@ -304,9 +306,9 @@
                     , width: '80%' //设置容器宽度
                     , arrow: 'always' //始终显示箭头
                     , interval: 2000
-                    //,anim: 'updown' //切换动画方式
                 });
             },
+            //成功之后修改当前轮播
             complete: function () {
                 //$.ajax({
                 //    url: "http://localhost:50519/api/goodsinfo/updateactibityinfosbyids?ids=" + ids.toString(),
@@ -353,6 +355,7 @@
                     $("#kills").append(html);
                 })
                 //秒杀
+                var len = 0;
                 $(".mss").hide();
                 var timer = setInterval(function () {
                     var s = (Times % 60) < 10 ? ('0' + Times % 60) : Times % 60;
@@ -365,8 +368,14 @@
                         clearTimeout(timer);
                         $(".ms").hide();
                         $(".mss").show();
+                        setTimeout(function () {
+                            $(".ms").show();
+                            $(".mss").hide();
+                            //三秒之后就停止秒杀
+                        }, 3000);
                     }
                     Times--;
+                    //时间每秒显示
                 }, 1000)
             },
             complete: function () {
@@ -416,7 +425,7 @@
                     }
                 });
             }
-        }); 
+        });
     }
     function KillImg(GoodsId) {
         alert(GoodsId);
@@ -429,7 +438,7 @@
     }
     $(function () {
         Lunbo();
-        
+
         //热卖24小时显示
         setInterval(function () {
             $.ajax({
@@ -445,14 +454,14 @@
                     })
                 }
             });
-        }, 864000);
+        }, 864000);    
     })
     function Hot(GoodsId) {
         alert(GoodsId);
     }
     function Ser() {
-        var a = $("#searchInput").val();
-        location.href = "/ShowMasters/SerchGoods?Name=" + a;
+        var Name = $("#searchInput").val();
+        location.href = "/ShowMasters/SerchGoods?Name=" + Name +"&Flag=1";
     }
     function Alist(s) {
         $.ajax({
@@ -461,7 +470,7 @@
             type: "get",
             contentType: "application/x-www-form-urlencoded",
             success: function (d) {
-                location.href = "/ShowMasters/SerchGoods?Types=" + d[0].clothesTypeName;
+                location.href = "/ShowMasters/SerchGoods?Name=" + d[0].clothesTypeName +"&Flag=2";
             }
         });
     }
