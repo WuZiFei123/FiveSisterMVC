@@ -18,6 +18,11 @@
     <script src="~/Content/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
+
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
 <body>
     <div class="hmtop">
@@ -68,13 +73,9 @@
             <div class="nav-cont">
                 <ul>
                     <li class="index"><a href="#">首页</a></li>
-                    <li class="qc"><a href="#">闪购</a></li>
-                    <li class="qc"><a href="#">限时抢</a></li>
-                    <li class="qc"><a href="#">团购</a></li>
-                    <li class="qc last"><a href="#">大包装</a></li>
                 </ul>
                 <div class="nav-extra">
-                    <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>去领优惠券
+                    <a href="javascript:location.href='/ShowMasters/DisCount'"><i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>去领优惠券</a>
                     <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
                 </div>
             </div>
@@ -305,7 +306,6 @@
                     , width: '80%' //设置容器宽度
                     , arrow: 'always' //始终显示箭头
                     , interval: 2000
-                    //,anim: 'updown' //切换动画方式
                 });
             },
             //成功之后修改当前轮播
@@ -357,7 +357,7 @@
                 //秒杀
                 var len = 0;
                 $(".mss").hide();
-                var timer = setInterval(function () {    
+                var timer = setInterval(function () {
                     var s = (Times % 60) < 10 ? ('0' + Times % 60) : Times % 60;
                     var h = Times / 3600 < 10 ? ('0' + parseInt(Times / 3600)) : parseInt(Times / 3600);
                     var m = (Times - h * 3600) / 60 < 10 ? ('0' + parseInt((Times - h * 3600) / 60)) : parseInt((Times - h * 3600) / 60);
@@ -425,7 +425,7 @@
                     }
                 });
             }
-        }); 
+        });
     }
     function KillImg(GoodsId) {
         alert(GoodsId);
@@ -438,7 +438,7 @@
     }
     $(function () {
         Lunbo();
-        
+
         //热卖24小时显示
         setInterval(function () {
             $.ajax({
@@ -454,8 +454,7 @@
                     })
                 }
             });
-        }, 864000);
-
+        }, 864000);    
     })
     function Hot(GoodsId) {
         alert(GoodsId);

@@ -106,9 +106,10 @@
                         <div class="sort">
                             <ul>
                                 <li class="first"><a href="#">综合排序</a></li>
-                                <li><a href="#">销量排序</a></li>
-                                <li><a href="#">价格优先</a></li>
-                                <li class="big"><a href="#">评价为主</a></li>
+                                <li><a href="javascript:Order(1)">销量倒序</a></li>
+                                <li><a href="javascript:Order(2)">销量正序</a></li>
+                                <li><a href="javascript:Prices(1)">价格正序</a></li>
+                                <li><a href="javascript:Prices(2)">价格倒序</a></li>
                             </ul>
                         </div>
                         <div class="clear"></div>
@@ -157,8 +158,10 @@
         var Brand = "";
         var Jb = 0;
         var Types = "";
+        var Orderby = 0;
         var AllPage = Math.ceil(Count * 1.0 / PageSize);
         var Name = "";
+        var Price = 0;
         function Serch() {
             PageIndex = 1;
             Name = $("#searchInput").val();
@@ -218,11 +221,11 @@
                 url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfosPage",
                 dataType: "json",
                 type: "get",
-                data: { PageIndex: PageIndex, Name: Name, Types: Types},
+                data: { PageIndex: PageIndex, Name: Name, Types: Types, Orderby: Orderby, Price: Price },
                 contentType: "application/x-www-form-urlencoded",
                 success: function (d) {
                     Count = d.count;
-                    $("#nums").text(d.count);
+                    $("#nums").text(d.con);
                     AllPage = Math.ceil(Count * 1.0 / PageSize);
                     $("#ulls").empty();
                     $(d.goodsInfos).each(function () {
@@ -290,5 +293,13 @@
         }
         function Master() {
             location.href = "/ShowMasters/ShowMaster";
-        }
+    }
+    function Order(o) {
+        Orderby = o;
+        ShowGoodsPage();
+    }
+    function Prices(p) {
+        Price = p;
+        ShowGoodsPage();
+    }
     </script>

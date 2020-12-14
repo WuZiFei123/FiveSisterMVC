@@ -86,5 +86,10 @@ namespace FiveSisterMVC.Controllers
         {
             return View();
         }
+
+        public IActionResult DisCount()
+        {
+            return View();
+        }
     }
 }
