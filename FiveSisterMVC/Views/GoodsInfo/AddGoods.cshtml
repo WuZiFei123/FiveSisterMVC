@@ -1,0 +1,259 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>商品添加</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+        $(function () {
+            PosstionPShow();
+        })
+
+        function PosstionPShow() {
+            $.ajax({
+                url: "http://localhost:50519/api/PosstionInfo/GetPosstionInfos?pid=1",
+                type: "get",
+                dataType: "json",
+                success: function (d) {
+                    $("#sel_p").empty();
+                    $("#sel_p").append("<option value='-1'>--请选择--</option>");
+                    $("#sel_c").append("<option value='-1'>--请选择--</option>");
+                    $("#sel_d").append("<option value='-1'>--请选择--</option>");
+                    $(d).each(function () {
+                        $("#sel_p").append("<option value='" + this.posstionInfoId + "'>" + this.posstionName + "</option>");
+                    })
+                    $.ajax({
+                        url: "http://localhost:50519/api/ShopInfo/GetShopInfos",
+                        type: "get",
+                        dataType: "json",
+                        contentType: "application/x-www-form-urlencoded",
+                        success: function (d) {
+                            $("#sel_ShopIdOut").empty();
+                            $("#sel_ShopIdOut").append("<option value='-1'>==请选择==</option>");
+                            $(d).each(function () {
+                                var str = "<option value='" + this.shopInfoId + "'>" + this.shopInfoName + "</option>";
+                                $("#sel_ShopIdOut").append(str);
+                            })
+                            $.ajax({
+                                url: "http://localhost:50519/api/ClothesType/GetClothesType?pid=0",
+                                type: "get",
+                                dataType: "json",
+                                contentType: "application/x-www-form-urlencoded",
+                                success: function (d) {
+                                    $("#check").empty();
+                                    $("#check").append("<option value='-1'>--请选择--</option>");
+                                    $(d).each(function () {
+                                        var str = "<option value='" + this.clothesTypeId + "'>" + this.clothesTypeName + "</option>";
+                                        $("#check").append(str);
+                                    })
+                                    GoodsSizeShow();
+                                }
+                            })
+
+                        }
+
+                    })
+                }
+            })
+        }
+        function PosstionCShow() {
+            $.ajax({
+                url: "http://localhost:50519/api/PosstionInfo/GetPosstionInfos",
+                type: "get",
+                dataType: "json",
+                data: { pid: $("#sel_p").val()},
+                success: function (d) {
+                    $("#sel_c").empty();
+                    $("#sel_c").append("<option value='-1'>--请选择--</option>");
+                    $("#sel_d").empty();
+                    $("#sel_d").append("<option value='-1'>--请选择--</option>");
+                    $(d).each(function () {
+                        $("#sel_c").append("<option value='" + this.posstionInfoId + "'>" + this.posstionName + "</option>");
+                    })
+                }
+            })
+        }
+        function PosstionDShow() {
+            $.ajax({
+                url: "http://localhost:50519/api/PosstionInfo/GetPosstionInfos",
+                type: "get",
+                dataType: "json",
+                data: { pid: $("#sel_c").val() },
+                success: function (d) {
+                    $("#sel_d").empty();
+                    $("#sel_d").append("<option value='-1'>--请选择--</option>");
+                    $(d).each(function () {
+                        $("#sel_d").append("<option value='" + this.posstionInfoId + "'>" + this.posstionName + "</option>");
+                    })
+                }
+            })
+        }
+        function ClothesTypeShow() {
+            $.ajax({
+                url: "http://localhost:50519/api/ClothesType/GetClothesType",
+                type: "get",
+                dataType: "json",
+                data: { pid: $("#check").val() },
+                contentType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    $("#checks").empty();
+                    $(d).each(function () {
+                        $("#checks").append("<input type='checkbox' class='cks' value='" + this.clothesTypeName + "' />" + this.clothesTypeName +"<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+                    })
+               }
+            })
+        }
+        function GoodsSizeShow() {
+            $.ajax({
+                url: "http://localhost:50519/api/SizeInfo/GetSizeInfos",
+                type: "get",
+                dataType: "json",
+                contentType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    $("#size").empty();
+                    $(d).each(function () {
+                        $("#size").append("<input type='checkbox' class='cks' value='" + this.sizeName + "' />" + this.sizeName + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+                    })
+                }
+            })
+        }
+        function GoodsAdd() {
+
+            var data = {};
+            var ah = [];
+            data.GoodsInfoName = $("#Text_GoodsInfoName").val();
+            data.GoodsInfoPrice = $("#Text_GoodsInfoPrice").val();
+
+            var sel1 = document.getElementById('sel_p');
+            var index1 = sel1.selectedIndex;
+            var text1 = sel1.options[index1].text;  
+
+            var sel2 = document.getElementById('sel_c');
+            var index2 = sel2.selectedIndex;
+            var text2 = sel2.options[index2].text;  
+
+            var sel3 = document.getElementById('sel_d');
+            var index3 = sel3.selectedIndex;
+            var text3 = sel3.options[index3].text;  
+
+
+            data.GoodsInfoPlace = text1 + text2 + text3;
+            data.ShopIdOut = $("#sel_ShopIdOut").val();
+
+            $("[type=checkbox]:checked").each(function () {
+                ah.push($(this).val());
+            })
+            data.GoodsTypes = ah.toString();
+
+
+            data.GoodsInfoDesc = $("#Text_GoodsInfoDesc").val();
+            $.ajax({
+                url: "http://localhost:50519/api/GoodsInfo/GoodsAdd",
+                type: "post",
+                dataType: "json",
+                data: data,
+                contentType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    if (d > 0) {
+                        alert("添加成功");
+                    }
+                    else {
+                        alert("添加失败");
+                        return;
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <table class="table table-bordered">
+        <tr>
+            <td>商品名称</td>
+            <td><input id="Text_GoodsInfoName" type="text" /></td>
+        </tr>
+        <tr>
+            <td>商品图片</td>
+            <td>
+                <img id="uploadimg1" class="uploadimg" src="~/Content/img/sctp.png" width="60" height="60" />
+                <input type="file" id="inputimg" name="img_file" style="display:none">
+                <div id="uploadimg" class="uploadPhoto" onclick="uploadPhoto()">
+                    +
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>商品单价</td>
+            <td><input id="Text_GoodsInfoPrice" type="text" /></td>
+        </tr>
+        <tr>
+            <td>商品出产地</td>
+            <td>
+                <select id="sel_p" onchange="PosstionCShow()"></select>
+                <select id="sel_c" onchange="PosstionDShow()"></select>
+                <select id="sel_d"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>所属店铺</td>
+            <td><select id="sel_ShopIdOut"></select></td>
+        </tr>
+        <tr>
+            <td>商品类型</td>
+            <td><select id="check" onchange="ClothesTypeShow()"></select></td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td id="checks"></td>
+        </tr>
+        <tr>
+            <td>商品可选尺码</td>
+            <td id="size"></td>
+
+        </tr>
+        <tr>
+            <td>商品简介</td>
+            <td><textarea id="Text_GoodsInfoDesc" rows="2" cols="30"></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input id="Button1" type="button" value="保存" onclick="GoodsAdd()" /></td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    function uploadPhoto() {
+        document.querySelector('#inputimg').value = null;
+        $("#inputimg").click();
+    }
+    document.getElementById("inputimg").addEventListener("change", function (e) {
+        var formData = new FormData();
+        formData.append("file1", document.getElementById("inputimg").files[0]);
+        $.ajax({
+            url: "/Home/UpLoadProcess",
+            type: 'POST',
+            data: formData,
+            async: false,
+            contentType: false,
+            processData: false,
+            success: function (msg) {
+                if (msg.error == 0) {
+                    $("#uploadimg1").attr("src", msg.message);
+                    $("#uploadimg1").attr("data-imgurl", msg.message);
+                }
+            },
+            error: function (msg) {
+                alert(msg.error);
+            }
+        });
+    })
+</script>
