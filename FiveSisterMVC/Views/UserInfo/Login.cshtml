@@ -106,7 +106,7 @@
         </div>
         <div style="margin: 20px 150px">
             <span>
-                没有账号？请点击<input id="Button2" type="button" class="but" value="注册" onclick="Zhu()" style="margin-left: 3px; border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
+                <a href="javascript:Zhu()">没有账号？请点击</a><input id="Button2" type="button" class="but" value="注册" onclick="Zhu()" style="margin-left: 3px; border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
                 <input id="Button3" type="button" value="找回密码" class="but" onclick="zhao()" style="margin-left: 3px; border: 0; height: 40px;margin-top:20px; border-radius: 5px; min-width: 100px; padding-left: 10px;font-size:18px" />
             </span>
         </div>
@@ -190,15 +190,7 @@
                     dataType: "json",
                     success: function (d) {
                         if (d != null) {
-                            alert("登录成功");
-                            ////跳用户界面
-                            //sessionStorage.setItem("Uname", d.uname);
-                            //sessionStorage.setItem("Upass", d.upass);
-                            //sessionStorage.setItem("Qma", d.qma);
-                            //sessionStorage.setItem("Rname", d.rname);
-                            //sessionStorage.setItem("Uid", d.uid);
-                            //location.href = "/UserInfo/Index";
-                            //return;
+                            location.href = "/ShowMasters/ShowMaster";
                         }
                         else {
                             alert("登陆失败！");
@@ -226,7 +218,6 @@
             return;
         }
         location.href = "/UserInfo/Update?Uname=" + Uname;
-
     }
 </script>
 

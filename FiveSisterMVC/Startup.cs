@@ -47,7 +47,6 @@ namespace FiveSisterMVC
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=ShopCar}/{action=SingShopCar}/{id?}");
-                    pattern: "{controller=UserInfo}/{action=Login}/{id?}"); 
             });
         }
     }

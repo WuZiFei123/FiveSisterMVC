@@ -23,7 +23,7 @@ namespace FiveSisterMVC.Controllers
         public string GetApi(string retype, string actionname, object obj = null)
         {
             HttpClient hc = new HttpClient();
-            hc.BaseAddress = new Uri("http://localhost:50519/api/1/");
+            hc.BaseAddress = new Uri("http://localhost:50519/api/ClothesType/");
             Task<HttpResponseMessage> task = null;
             switch (retype)
             {
@@ -81,12 +81,18 @@ namespace FiveSisterMVC.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 商品详情
+        /// </summary>
+        /// <returns></returns>
         public IActionResult GoodsLook()
         {
             return View();
         }
-
+        /// <summary>
+        /// 获取优惠券
+        /// </summary>
+        /// <returns></returns>
         public IActionResult DisCount()
         {
             return View();

@@ -279,18 +279,34 @@
 
     function gameover() {
         layer.msg('游戏结束', { icon: 5 });
-        setTimeout(function () {
-            layer.open({
-                content: '测试回调',
-                success: function (layero, index) {
-                }
-            });  
-        }, 2000);
-         
-        setTimeout(function () {
-            location.href = "/ShowMasters/ShowMaster";
-        }, 2000);
+        var s = Math.floor(Math.random() * 10);
+        if (s == 0) {
+            s = 1;
+        }
+        $.ajax({
+            url: "http://localhost:50519/api/GoodsInfo/GetGoodsInfoTop",
+            dataType: "json",
+            type: "get",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#hotgoods").empty();
+                $(d).each(function () {
+                    var html = "<li><a onclick='Hot(" + this.goodsInfoId + ")'><img class='hot'  src='" + this.goodsInfoImage + "' /></a></li>";
+                    $("#hotgoods").append(html);
+                })
+            }
+        });
+        layer.confirm('您的分数是' + score, {
+            btn: ['按钮一', '按钮二', '按钮三'] //可以无限个按钮
+            , btn3: function (index, layero) {
+                //按钮【按钮三】的回调
+            }
+        }, function (index, layero) {
 
+                setTimeout(function () { location.href = "/ShowMasters/SerchGoods"; }, 2000);
+        }, function (index) {
+            //按钮【按钮二】的回调
+        }); 
     }
 
     function isaddedArray() {//将判断能否合并的数组值置为0
