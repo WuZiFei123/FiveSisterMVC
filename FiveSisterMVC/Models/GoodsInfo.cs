@@ -55,5 +55,13 @@ namespace FiveSisterMVC.Models
         /// 商品简介
         /// </summary>
         public string GoodsInfoDesc { get; set; }
+        /// <summary>
+        /// 商品品牌
+        /// </summary>
+        public string GoodsBrand { get; set; }
+        /// <summary>
+        /// 商品级别
+        /// </summary>
+        public int GoodsJb { get; set; }
     }
 }

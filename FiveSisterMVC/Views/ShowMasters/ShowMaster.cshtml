@@ -43,7 +43,7 @@
                     <div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>我的购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
                 </div>
                 <div class="topMessage favorite">
-                    <div class="menu-hd"><a href="javascript:location.href='/ShowMasters/GoodsCollect'" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>商品收藏</span></a></div>
+                    <div class="menu-hd"><a href="javascript:location.href='/ShowMasters/GoodsAddCollect'" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>商品收藏</span></a></div>
                 </div>
             </ul>
         </div>
@@ -153,7 +153,7 @@
             </div>
             <div class="clear"></div>
             <!--商城公告-->
-            <div class="marqueenTwo">
+            <div class="marqueenTwo" style="height:280px;">
                 <span class="marqueen-title"><i class="am-icon-volume-up am-icon-fw"></i>商城头条<em class="am-icon-angle-double-right"></em></span>
                 <div class="demo">
                     <ul>
@@ -271,7 +271,7 @@
 
             .hot {
                 width: 250px;
-                height: 210px;
+                height: 215px;
             }
         </style>
     </div>
@@ -283,6 +283,7 @@
     var Fen = 0;
     var Miao = 0;
     var ids = [];
+    //轮播初始显示
     layui.use('carousel', function () {
         var carousel = layui.carousel;
         $.ajax({
@@ -307,6 +308,7 @@
                     //,anim: 'updown' //切换动画方式
                 });
             },
+            //成功之后修改当前轮播
             complete: function () {
                 //$.ajax({
                 //    url: "http://localhost:50519/api/goodsinfo/updateactibityinfosbyids?ids=" + ids.toString(),
@@ -353,8 +355,9 @@
                     $("#kills").append(html);
                 })
                 //秒杀
+                var len = 0;
                 $(".mss").hide();
-                var timer = setInterval(function () {
+                var timer = setInterval(function () {    
                     var s = (Times % 60) < 10 ? ('0' + Times % 60) : Times % 60;
                     var h = Times / 3600 < 10 ? ('0' + parseInt(Times / 3600)) : parseInt(Times / 3600);
                     var m = (Times - h * 3600) / 60 < 10 ? ('0' + parseInt((Times - h * 3600) / 60)) : parseInt((Times - h * 3600) / 60);
@@ -365,8 +368,14 @@
                         clearTimeout(timer);
                         $(".ms").hide();
                         $(".mss").show();
+                        setTimeout(function () {
+                            $(".ms").show();
+                            $(".mss").hide();
+                            //三秒之后就停止秒杀
+                        }, 3000);
                     }
                     Times--;
+                    //时间每秒显示
                 }, 1000)
             },
             complete: function () {
@@ -446,13 +455,14 @@
                 }
             });
         }, 864000);
+
     })
     function Hot(GoodsId) {
         alert(GoodsId);
     }
     function Ser() {
-        var a = $("#searchInput").val();
-        location.href = "/ShowMasters/SerchGoods?Name=" + a;
+        var Name = $("#searchInput").val();
+        location.href = "/ShowMasters/SerchGoods?Name=" + Name +"&Flag=1";
     }
     function Alist(s) {
         $.ajax({
@@ -461,7 +471,7 @@
             type: "get",
             contentType: "application/x-www-form-urlencoded",
             success: function (d) {
-                location.href = "/ShowMasters/SerchGoods?Types=" + d[0].clothesTypeName;
+                location.href = "/ShowMasters/SerchGoods?Name=" + d[0].clothesTypeName +"&Flag=2";
             }
         });
     }

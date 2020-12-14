@@ -241,7 +241,7 @@
                         "<div class='s-tp'>" +
                         "<span onclick='Quxiao(" + this.goodsAddInfoId + ")' class='ui-btn-loading-before'>取消收藏</span>" +
                         "<i class='am-icon-shopping-cart'></i>" +
-                        "<span class='ui-btn-loading-before buy'>加入购物车</span><p>" +
+                        "<span onclick='Cargo(" + this.goodsInfoId + ")' class='ui-btn-loading-before buy'>加入购物车</span><p>" +
                         "<a href='' class='c-nodo J_delFav_btn'>取消收藏</a>" +
                         "</p></div></div>" +
                         "</div >";
@@ -253,6 +253,9 @@
     $(function () {
         ShowClect();
     })
+    function Cargo(GoodsId) {
+        alert(GoodsId);
+    }
     function Quxiao(ClectId) {
         $.ajax({
             url: "http://localhost:50519/api/GoodsAdd/UpdateGoodsClect?ClectId=" + ClectId,
