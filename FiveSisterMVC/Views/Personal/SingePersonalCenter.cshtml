@@ -83,7 +83,7 @@
                             <div class="am-form-group">
                                 <label for="user-name" class="am-form-label">姓名</label>
                                 <div class="am-form-content">
-                                    <input type="text" value="吴小飞" id="user-name2" placeholder="name">
+                                    <input type="text" value="" id="user-name2" placeholder="name">
 
                                 </div>
                             </div>
@@ -105,46 +105,20 @@
                             <div class="am-form-group">
                                 <label for="user-birth" class="am-form-label">生日</label>
                                 <div class="am-form-content birth">
-                                    <input id="user-brith" value="2020-12-12" type="date" />
+                                    <input id="user-brith" value="" type="date" />
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="user-phone" class="am-form-label">电话</label>
                                 <div class="am-form-content">
-                                    <input id="user-phone" value="17845124578" placeholder="telephonenumber" type="tel">
+                                    <input id="user-phone" value="" placeholder="telephonenumber" type="tel">
 
                                 </div>
                             </div>
                             <div class="am-form-group">
                                 <label for="user-email" class="am-form-label">电子邮件</label>
                                 <div class="am-form-content">
-                                    <input id="user-email" value="774584545@qq.com" placeholder="Email" type="email">
-
-                                </div>
-                            </div>
-                            <div class="am-form-group address">
-                                <label for="user-address" class="am-form-label">收货地址</label>
-                                <div class="am-form-content address">
-                                    <a href="address.html">
-                                        <p class="new-mu_l2cw">
-                                            <span class="province">湖北</span>省
-                                            <span class="city">武汉</span>市
-                                            <span class="dist">洪山</span>区
-                                            <span class="street">雄楚大道666号(中南财经政法大学)</span>
-                                            <span class="am-icon-angle-right"></span>
-                                        </p>
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="am-form-group safety">
-                                <label for="user-safety" class="am-form-label">账号安全</label>
-                                <div class="am-form-content safety">
-                                    <a href="safety.html">
-
-                                        <span class="am-icon-angle-right"></span>
-
-                                    </a>
+                                    <input id="user-email" value="" placeholder="Email" type="email">
 
                                 </div>
                             </div>
@@ -226,7 +200,6 @@
 </html>
 <script>
     $(function () {
-        $("[name='radio10'][value=1]").attr("checked", "checked").prop("checked", true).trigger("change");
         PeersonalFill();
     })
     //个人信息回显

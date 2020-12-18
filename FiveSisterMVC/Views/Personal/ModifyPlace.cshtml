@@ -1,11 +1,12 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 
-    <title>地址管理</title>
+    <title>地址修改</title>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <link href="~/Content/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" />
     <link href="~/Content/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" />
@@ -48,7 +49,15 @@
 
                 <!--悬浮搜索框-->
 
-                
+                <div class="nav white">
+                    <div class="search-bar pr">
+                        <a name="index_none_header_sysc" href="#"></a>
+                        <form>
+                            <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        </form>
+                    </div>
+                </div>
 
                 <div class="clear"></div>
             </div>
@@ -80,78 +89,8 @@
 
                 <div class="user-address">
                     <!--标题 -->
-                    <div class="am-cf am-padding">
-                        <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">地址管理</strong> / <small>Address&nbsp;list</small></div>
-                    </div>
                     <hr />
-                    <ul id="placemore" class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
-
-                        @*<li class="user-addresslist defaultAddr">
-                                <span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
-                                <p class="new-tit new-p-re">
-                                    <span class="new-txt">小叮当</span>
-                                    <span class="new-txt-rd2">159****1622</span>
-                                </p>
-                                <div class="new-mu_l2a new-p-re">
-                                    <p class="new-mu_l2cw">
-                                        <span class="title">地址：</span>
-                                        <span class="street">雄楚大道666号(中南财经政法大学)</span>
-                                    </p>
-                                </div>
-                                <div class="new-addr-btn">
-                                    <a href="#"><i class="am-icon-edit"></i>编辑</a>
-                                    <span class="new-addr-bar">|</span>
-                                    <a href="javascript:void(0);" onclick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
-                                </div>
-                            </li>
-
-                            <li class="user-addresslist">
-                                <span class="new-option-r"><i class="am-icon-check-circle"></i>设为默认</span>
-                                <p class="new-tit new-p-re">
-                                    <span class="new-txt">小叮当</span>
-                                    <span class="new-txt-rd2">159****1622</span>
-                                </p>
-                                <div class="new-mu_l2a new-p-re">
-                                    <p class="new-mu_l2cw">
-                                        <span class="title">地址：</span>
-                                        <span class="province">湖北</span>省
-                                        <span class="city">武汉</span>市
-                                        <span class="dist">洪山</span>区
-                                        <span class="street">雄楚大道666号(中南财经政法大学)</span>
-                                    </p>
-                                </div>
-                                <div class="new-addr-btn">
-                                    <a href="#"><i class="am-icon-edit"></i>编辑</a>
-                                    <span class="new-addr-bar">|</span>
-                                    <a href="javascript:void(0);" onclick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
-                                </div>
-                            </li>
-
-                            <li class="user-addresslist">
-                                <span class="new-option-r"><i class="am-icon-check-circle"></i>设为默认</span>
-                                <p class="new-tit new-p-re">
-                                    <span class="new-txt">小叮当</span>
-                                    <span class="new-txt-rd2">159****1622</span>
-                                </p>
-                                <div class="new-mu_l2a new-p-re">
-                                    <p class="new-mu_l2cw">
-                                        <span class="title">地址：</span>
-                                        <span class="province">湖北</span>省
-                                        <span class="city">武汉</span>市
-                                        <span class="dist">洪山</span>区
-                                        <span class="street">雄楚大道666号(中南财经政法大学)</span>
-                                    </p>
-                                </div>
-                                <div class="new-addr-btn">
-                                    <a href="#"><i class="am-icon-edit"></i>编辑</a>
-                                    <span class="new-addr-bar">|</span>
-                                    <a href="javascript:void(0);" onclick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
-                                </div>
-                            </li>*@
-
-                    </ul>
                     <div class="clear"></div>
-                    <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
                     <!--例子-->
                     <div class="am-modal am-modal-no-btn" id="doc-modal-1">
 
@@ -159,7 +98,7 @@
 
                             <!--标题 -->
                             <div class="am-cf am-padding">
-                                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add&nbsp;address</small></div>
+                                <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改地址</strong> / <small>Modify&nbsp;address</small></div>
                             </div>
                             <hr />
 
@@ -169,14 +108,14 @@
                                     <div class="am-form-group">
                                         <label for="user-name" class="am-form-label">收货人</label>
                                         <div class="am-form-content">
-                                            <input type="text" id="user-name" placeholder="收货人">
+                                            <input type="text" value="" id="user-name" placeholder="收货人">
                                         </div>
                                     </div>
 
                                     <div class="am-form-group">
                                         <label for="user-phone" class="am-form-label">手机号码</label>
                                         <div class="am-form-content">
-                                            <input id="user-phone" placeholder="手机号必填" type="email">
+                                            <input id="user-phone" value="" placeholder="手机号必填" type="email">
                                         </div>
                                     </div>
                                     <div class="am-form-group">
@@ -194,19 +133,18 @@
                                         </div>
                                     </div>
 
-
                                     <div class="am-form-group">
                                         <label for="user-intro" class="am-form-label">详细地址</label>
                                         <div class="am-form-content">
-                                            <textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
+                                            <textarea class="" rows="3" value="" id="user-intro"  placeholder="输入详细地址"></textarea>
                                             <small>100字以内写出你的详细地址...</small>
                                         </div>
                                     </div>
 
                                     <div class="am-form-group">
                                         <div class="am-u-sm-9 am-u-sm-push-3">
-                                            <a href="javascript:add()" class="am-btn am-btn-danger">保存</a>
-                                            <a href="javascript:empty()" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+                                            <a href="javascript:modifyPlace()" class="am-btn am-btn-danger">保存</a>
+                                            <a href="/Personal/Place" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
                                         </div>
                                     </div>
                                 </form>
@@ -231,7 +169,7 @@
 
                     })
                 </script>
-                @*<input id="Button1" style="background-color:deeppink" type="button" value="button" />*@
+
                 <div class="clear"></div>
 
             </div>
@@ -269,7 +207,8 @@
                     <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                     <ul>
                         <li> <a href="/Personal/SingePersonalCenter">个人信息</a></li>
-                        <li> <a href="#">地址管理</a></li>
+                        <li> <a href="safety.html">安全设置</a></li>
+                        <li> <a href="/Personal/Place">地址管理</a></li>
                         <li> <a href="cardlist.html">快捷支付</a></li>
                     </ul>
                 </li>
@@ -313,23 +252,16 @@
 
         </aside>
     </div>
+
 </body>
 </html>
 <script>
     $(function () {
-        PlaceAppend();
-    })
-    function empty() {
-        $("#user-name").val("");
-        $("#user-phone").val("");
-        $("#user-intro").val("");
+        $("#user-name").val("@Html.Raw(ViewBag.addressInfoPeople)");
+        $("#user-phone").val("@ViewBag.addressInfoPhone");
+        $("#user-intro").val("@Html.Raw(ViewBag.addressInfoName)");
         PosstionPShow();
-        $("#sel_c").empty();
-        $("#sel_c").append("<option value='-1'>==请选择市==</option>");
-        $("#sel_d").empty();
-        $("#sel_d").append("<option value='-1'>==请选择区==</option>");
-    }
-
+    })
     function PosstionPShow() {
         $.ajax({
             url: "http://localhost:50519/api/PosstionInfo/GetPosstionInfos?pid=1",
@@ -340,10 +272,12 @@
                 $("#sel_p").append("<option value='-1'>==请选择省==</option>");
                 $("#sel_c").append("<option value='-1'>==请选择市==</option>");
                 $("#sel_d").append("<option value='-1'>==请选择区==</option>");
+                console.log(d);
                 $(d).each(function () {
-                    $("#sel_p").append("<option value='" + this.posstionInfoId + "'>" + this.posstionName + "</option>");
+                        $("#sel_p").append("<option value='" + this.posstionInfoId + "'>" + this.posstionName + "</option>");
                 })
-               
+                $("#sel_p").val(parseInt("@ViewBag.posstionInfoPIdOut"));
+                PosstionCShow();
             }
         })
     }
@@ -361,6 +295,8 @@
                 $(d).each(function () {
                     $("#sel_c").append("<option value='" + this.posstionInfoId + "'>" + this.posstionName + "</option>");
                 })
+                $("#sel_c").val(parseInt("@ViewBag.posstionInfoCIdOut"));
+                PosstionDShow();
             }
         })
     }
@@ -376,129 +312,30 @@
                 $(d).each(function () {
                     $("#sel_d").append("<option value='" + this.posstionInfoId + "'>" + this.posstionName + "</option>");
                 })
+                $("#sel_d").val(parseInt("@ViewBag.posstionInfoDIdOut"));
             }
         })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    var aaa = 0;
-    function PlaceAppend() {
-        $("#placemore").empty();
-        $.ajax({
-            url: "http://localhost:50519/api/PersonalCenter/GetAddressInfos",
-            dataType: "json",
-            data: { userInfoId: parseInt("@ViewBag.userInfoId")},
-            type: "get",
-            success: function (d) {
-                $(d).each(function () {
-                    var sta = this.addressInfoState != 1 ? "<li class='user-addresslist'><span  class='new-option-r'><i class='am-icon-check-circle'></i><input style='background-color: deeppink'  type='button' onclick='modify(" + this.addressInfoId + ")' value='设为默认'/></span>" : "<li class='user-addresslist defaultAddr'><span class='new-option-r'><i class='am-icon-check-circle'></i>默认地址</span>";
-                    var str = sta+
-                        "<p class='new-tit new-p-re'>" +
-                        "<span class='new-txt'>"+this.addressInfoPeople+"</span>" +
-                        "<span class='new-txt-rd2'>" + this.addressInfoPhone + "</span>" +
-                        "</p>" +
-                        "<div class='new-mu_l2a new-p-re'>" +
-                        "<p class='new-mu_l2cw'>" +
-                        "<span class='title'>地址:</span>" +
-                        "<span class='street'>" + this.addressInfoName + "</span>" +
-                        "</p>" +
-                        "</div>" +
-                        "<div class='new-addr-btn'>" +
-                        "<a href='/Personal/ModifyPlace?addressInfoId=" + this.addressInfoId + "&posstionInfoPIdOut=" + this.posstionInfoPIdOut + "&posstionInfoCIdOut=" + this.posstionInfoCIdOut + "&posstionInfoDIdOut=" + this.posstionInfoDIdOut + "&addressInfoPeople=" + this.addressInfoPeople + "&addressInfoPhone=" + this.addressInfoPhone + "&addressInfoName=" + this.addressInfoName + "&addressInfoState=" + this.addressInfoState + "'><i class='am-icon-edit'></i>编辑</a>" +
-                        "<span class='new-addr-bar'>|</span>" +
-                        "<a href='javascript:delClick("+this.addressInfoId+")' ><i class='am-icon-trash'></i>删除</a>" +
-                        "</div>" +
-                        "</li>";
-                    $("#placemore").append(str);
-                })
-                if (aaa==0) {
-                    PosstionPShow();
-                    aaa++;
-                }
-                
-            }
-        })
-    }
-
-    function delClick(addressInfoId) {
-        if (confirm("确认要删除吗？")) {
-            $.ajax({
-                url: "http://localhost:50519/api/PersonalCenter/DeleteAddressInfo",
-                dataType: "json",
-                data: { addressInfoId: addressInfoId },
-                type: "get",
-                success: function (d) {
-                    if (d > 0) {
-                        $("#placemore").empty();
-                        PlaceAppend();
-                    }
-                }
-            })
-        }
-    }
-
-    function modify(AddressInfoId) {
-        var uid = "@ViewBag.userInfoId";
-        $.ajax({
-            url: "http://localhost:50519/api/PersonalCenter/ModifyStateAddressInfo",
-            dataType: "json",
-            data: { 'userInfoId': uid},
-            type: "get",
-            success: function (d) {
-                if (d > 0) {
-                    $.ajax({
-                        url: "http://localhost:50519/api/PersonalCenter/ModifyDefaultAddressInfo",
-                        dataType: "json",
-                        data: { addressInfoId: AddressInfoId},
-                        type: "get",
-                        success: function (d) {
-                            if (d > 0) {
-                                $("#placemore").empty();
-                                PlaceAppend();
-                            }
-                        }
-                    })
-                }
-            }
-        })
-    }
-
-    function add() {
+    function modifyPlace() {
         var obj = {
             addressInfoPeople: $("#user-name").val(),
             addressInfoPhone: $("#user-phone").val(),
-            userInfoIdOut: parseInt("@ViewBag.userInfoId"),
+            addressInfoId: parseInt("@ViewBag.addressInfoId "),
             posstionInfoPIdOut: $("#sel_p").val(),
             posstionInfoCIdOut: $("#sel_c").val(),
             posstionInfoDIdOut: $("#sel_d").val(),
             addressInfoName: $("#sel_p option:checked").text() + $("#sel_c option:checked").text() + $("#sel_d option:checked").text() + $("#user-intro").val(),
-            addressInfoState: 0
+            addressInfoState: parseInt("@ViewBag.addressInfoState")
         };
        $.ajax({
-           url: "http://localhost:50519/api/PersonalCenter/AddressInfoAdd",
+           url: "http://localhost:50519/api/PersonalCenter/AddressInfoModify",
            dataType: "json",
-           async: false,
            data: obj,
            type: "post",
            success: function (d) {
                if (d > 0) {
-                   empty();
-                   alert("添加成功!");
-                   PlaceAppend();
+                   alert("保存成功!");
+                   location.href = "/Personal/Place";
                }
            }
        })
