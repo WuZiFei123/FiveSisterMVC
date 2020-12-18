@@ -31,15 +31,22 @@
             <ul class="message-l">
                 <div class="topMessage">
                     <div class="menu-hd">
-                        <a href="#" target="_top" class="h">亲，请登录</a>
-                        <a href="#" target="_top">免费注册</a>
+                        @*@if (ViewBag.User.UserInfoHead == "")
+                        {*@
+                            <a href="#" target="_top" class="h">亲，请登录</a>
+                            <a href="#" target="_top">免费注册</a>
+                        @*}
+                        else
+                        {
+                            <h3>欢迎回家:@ViewBag.User.UserInfoName &nbsp;&nbsp; <img style="width:50px;height:50px;border-bottom-right-radius:50%;border-bottom-left-radius:50%;border-top-right-radius:50%;border-top-left-radius:50%" src="@ViewBag.User.UserInfoHead" /></h3>
+                        }*@
                     </div>
                 </div>
             </ul>
             <!--个人收藏-->
             <ul class="message-r">
                 <div class="topMessage home">
-                    <div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+                    <div class="menu-hd"><a href="javascript:location.href='/ShowMasters/ShowMaster'" target="_top" class="h">商城首页</a></div>
                 </div>
                 <div class="topMessage my-shangcheng">
                     <div class="menu-hd MyShangcheng"><a href="javascript:location.href='/Personal/SingePersonalCenter'" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -56,7 +63,7 @@
         <div class="nav white">
             <div class="logo"><img src="~/Content/images/logo.png" /></div>
             <div class="logoBig">
-                <li><img src="~/Content/231.png" /></li>
+                <li><img style="width:155px;height:77px;padding-top:17px;" src="~/Content/231.png" /></li>
             </div>
             <div class="search-bar pr">
                 <form>
@@ -144,12 +151,15 @@
                 })
             </script>
             <!--昨日热卖-->
+            <style>
+                .lii{
+                    width:100px;
+                    height:100px;
+                    border:solid;
+                }
+            </style>
             <div class="row">
                 <ul id="hotgoods">
-                    @*<li><a onclick=''><img src="~/Content/images/row1.jpg" /></a></li>
-                        <li><a><img  src="~/Content/images/row2.jpg" /></a></li>
-                        <li><a><img src="~/Content/images/row3.jpg" /></a></li>
-                        <li><a><img src="~/Content/images/row4.jpg" /></a></li>*@
                 </ul>
             </div>
             <div class="clear"></div>
@@ -158,27 +168,20 @@
                 <span class="marqueen-title"><i class="am-icon-volume-up am-icon-fw"></i>商城头条<em class="am-icon-angle-double-right"></em></span>
                 <div class="demo">
                     <ul>
-                        <li class="title-first">
-                            <a target="_blank" href="#">
-                                <img src="../images/TJ2.jpg" /></img>
-                                <span>[特惠]</span>洋河年末大促，低至两件五折
-                            </a>
-                        </li>
-                        <li class="title-first">
-                            <a target="_blank" href="#">
-                                <span>[公告]</span>商城与广州市签署战略合作协议
-                                <img src="../images/TJ.jpg" /></img>
-                                <p>XXXXXXXXXXXXXXXXXX</p>
-                            </a>
-                        </li>
-                        <li><a target="_blank" href="#"><span>[特惠]</span>女生节商城爆品1分秒	</a></li>
-                        <li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
-                        <li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
-                        <li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
-                        <li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
+
+                        <li><a class="gao" target="_blank" href="#"><span>[特惠]</span>女生节商城爆品1分秒	</a></li>
+                        <li><a class="gao" target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
+                        <li><a class="gao" target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
+                        <li><a class="gao" target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
+                        <li><a class="gao" target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
                     </ul>
                 </div>
             </div>
+            <style>
+                .gao:hover {
+                    color: #F03726;
+                }
+            </style>
             <script type="text/javascript">
                 if ($(window).width() < 640) {
                     function autoScroll(obj) {
@@ -210,30 +213,6 @@
                 </div>
             </div>
             <div id="kills" class="am-g am-g-fixed sale">
-                @*@for (int i = 0; i < 4; i++)
-                {
-                    <div class="am-u-sm-3 sale-item">
-                        <div class="s-img">
-                            <a href="#" ><img src="~/Content/images/sale3.jpg" /></a>
-                        </div>
-                        <div class="s-info">
-                            <a href="#"><p class="s-title">ZEK 原味海苔</p></a>
-                            <div class="s-price">
-                                ￥<b>9.90</b>
-                                <div class="ms" style="">
-                                    <form class="layui-form">
-                                        <button  type="button" class="layui-btn layui-btn-disabled">秒杀</button>
-                                    </form>
-                                </div>
-                                <div class="mss" style="">
-                                    <form class="layui-form">
-                                        <button type="button" class="layui-btn layui-btn-danger">秒杀</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }*@
             </div>
         </div>
         <script>
@@ -272,7 +251,22 @@
 
             .hot {
                 width: 250px;
-                height: 215px;
+                height: 300px;
+                border: solid;
+                border-width: 1px;
+                border-color: #F9F9F9;
+            }
+                .hot:hover {
+                    padding-top: 5px;
+                    padding-right: 5px;
+                    padding-left: 5px;
+                    padding-bottom: 5px;
+                }
+            .liimg:hover {
+                padding-top:5px;
+                padding-right:5px;
+                padding-left:5px;
+                padding-bottom:5px;
             }
         </style>
     </div>
@@ -334,7 +328,7 @@
                 $(d).each(function () {
                     var html = "<div class='am-u-sm-3 sale-item'>"+
                         "<div class='s-img'>" +
-                        "<a  href=''><img style='width:200px;height:200px;' onclick='KillImg(" + this.goodsInfoIdOut +")' src='" + this.killInfoImg + "' /></a>" +
+                        "<a><img class='liimg' style='width:200px;height:250px;' onclick='KillImg(" + this.goodsInfoIdOut +")' src='" + this.killInfoImg + "' /></a>" +
                             "</div>" +
                         "<div class='s-info'>" +
                         "<a href='#'><p class='s-title'>快快抢购</p></a>" +
@@ -404,7 +398,6 @@
                                     contentType: "application/x-www-form-urlencoded",
                                     success: function (d) {
                                         $("#lunbo").empty();
-                                        console.log(d);
                                         $(d).each(function () {
                                             var html = "<div><a onclick='Lun(" + this.goodsInfoIdOut + ")'><img src='" + this.actibityInfoImg + "' style='width:100%' /></a></div>";
                                             ids.push(this.actibityInfoId);
@@ -428,16 +421,16 @@
         });
     }
     function KillImg(GoodsId) {
-        alert(GoodsId);
+        location.href = "/ShowMasters/GoodsLook?GoodsId=" + GoodsId;
     }
+    //秒杀按钮
     function Kill(GoodsId) {
         alert(GoodsId);
     }
     function Lun(Id) {
-        alert(Id);
+        location.href = "/ShowMasters/GoodsLook?GoodsId=" + Id;
     }
     $(function () {
-        
         Lunbo();
         //热卖24小时显示
         setInterval(function () {
@@ -457,7 +450,7 @@
         }, 864000);    
     })
     function Hot(GoodsId) {
-        alert(GoodsId);
+        location.href = "/ShowMasters/GoodsLook?GoodsId=" + GoodsId;         
     }
     function Ser() {
         var Name = $("#searchInput").val();

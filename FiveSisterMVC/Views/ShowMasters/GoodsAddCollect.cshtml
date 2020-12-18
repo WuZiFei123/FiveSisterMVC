@@ -92,16 +92,15 @@
                     <div class="you-like">
                         <div class="s-bar">
                             我的收藏
-                            <a  class="am-badge am-badge-danger am-round">下架</a>
                         </div>
                         <div id="clectsaasas" class="s-content">
-                            @*@for (int i = 0; i < 15; i++)
+                            @*@for (int i = 0; i <3; i++)
                                 {
                                     <div class="s-item-wrap">
                                         <div class="s-item">
                                             <div class="s-pic">
                                                 <a href="#" class="s-pic-link">
-                                                    <img src="/images/1.png" alt="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" class="s-pic-img s-guess-item-img">
+                                                    <img src="/images/中老年羽绒服.png" alt="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" class="s-pic-img s-guess-item-img">
                                                 </a>
                                             </div>
                                             <div class="s-info">
@@ -116,11 +115,9 @@
                                                 </div>
                                             </div>
                                             <div class="s-tp">
-                                                <span onclick="Quxiao()" class="ui-btn-loading-before">取消收藏</span>
+                                                    <span onclick="Quxiao()" class="ui-btn-loading-before">取消收藏</span>
                                                 <i class="am-icon-shopping-cart"></i>
-                                                <span class="ui-btn-loading-before buy">加入购物车</span>
                                                 <p>
-                                                    <a href="javascript:;" class="c-nodo J_delFav_btn">取消收藏</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -132,6 +129,19 @@
                 </div>
 
             </div>
+            <style>
+                .ui-btn-loading-before {
+                    right: 0px;
+                    bottom: 121px;
+                    width: 100%;
+                    left: 45px;
+                    height: 35px;
+                    margin-left: -45px;
+                }
+                .ui-btn-loading-before:hover {
+                    height:30px;
+                }
+            </style>
             <!--底部-->
             <div class="footer">
                 <div class="footer-hd">
@@ -159,43 +169,45 @@
         <aside class="menu">
             <ul>
                 <li class="person active">
-                    <a href="index.html"><i class="am-icon-user"></i>个人中心</a>
+                    <a><i class="am-icon-user"></i>个人中心</a>
                 </li>
                 <li class="person">
                     <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                     <ul>
-                        <li> <a href="information.html">个人信息</a></li>
-                        <li> <a href="safety.html">安全设置</a></li>
-                        <li> <a href="address.html">地址管理</a></li>
+                        <li> <a href="javascript:location.href='/Personal/SingePersonalCenter'">个人信息</a></li>
+                        <li> <a href="javascript:location.href='/Personal/'">安全设置</a></li>
+                        <li> <a href="javascript:location.href='/Personal/Place'">地址管理</a></li>
                     </ul>
                 </li>
                 <li class="person">
-                    <p><i class="am-icon-balance-scale"></i>我的交易</p>
+                    <p><i class="am-icon-balance-scale"></i>我的订单</p>
                     <ul>
-                        <li><a href="order.html">订单管理</a></li>
-                        <li> <a href="comment.html">评价商品</a></li>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderPayMoney'">待付款</a></li>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderFh'">待发货</a></li>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderMessage'">待收货</a></li>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderRemark'">待评价</a></li>
                     </ul>
                 </li>
                 <li class="person">
                     <p><i class="am-icon-dollar"></i>我的资产</p>
                     <ul>
-                        <li> <a href="coupon.html">优惠券 </a></li>
-                        <li> <a href="walletlist.html">账户余额</a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/DisMessage'">优惠券 </a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">账户余额</a></li>
                     </ul>
                 </li>
 
                 <li class="person">
                     <p><i class="am-icon-tags"></i>我的收藏</p>
                     <ul>
-                        <li> <a href="collection.html">收藏</a></li>
-                        <li> <a href="foot.html">足迹</a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/GoodsAddCollect'">收藏</a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">足迹</a></li>
                     </ul>
                 </li>
 
                 <li class="person">
                     <ul>
-                        <li> <a href="suggest.html">意见反馈</a></li>
-                        <li> <a href="news.html">我的消息</a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">意见反馈</a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">我的消息</a></li>
                     </ul>
                 </li>
             </ul>
@@ -219,7 +231,7 @@
                         "<div  class='s-item'>" +
                         "<div class='s-pic'>" +
                         "<a href='#' class='s-pic-link'>" +
-                        "<img style='width:186px;height:210px;' src='" + this.goodsInfoImage + "' alt='' title='' class='s-pic-imgs-guess-item-img'>" +
+                        "<img onclick='GoodsXq(" + this.goodsInfoIdOut+")' style='width:186px;height:210px;' src='" + this.goodsInfoImage + "' alt='' title='' class='s-pic-imgs-guess-item-img'>" +
                         "</a>"+
                         "</div>"+
                         "<div class='s-info'>"+
@@ -236,14 +248,15 @@
                         "<div class='s-tp'>" +
                         "<span onclick='Quxiao(" + this.goodsAddInfoId + ")' class='ui-btn-loading-before'>取消收藏</span>" +
                         "<i class='am-icon-shopping-cart'></i>" +
-                        "<span onclick='Cargo(" + this.goodsInfoId + ")' class='ui-btn-loading-before buy'>加入购物车</span><p>" +
-                        "<a href='' class='c-nodo J_delFav_btn'>取消收藏</a>" +
                         "</p></div></div>" +
                         "</div >";
                     $("#clectsaasas").append(html);
                 })
             }
         });
+    }
+    function GoodsXq(GoodsId) {
+        location.href = "/ShowMasters/GoodsLook?GoodsId=" + GoodsId;
     }
     $(function () {
         ShowClect();

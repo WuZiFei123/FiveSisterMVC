@@ -1,0 +1,386 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+    <title>退换货管理</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" />
+    <link href="~/Content/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" />
+    <link href="~/Content/css/personal.css" rel="stylesheet" />
+    <link href="~/Content/css/orstyle.css" rel="stylesheet" />
+    <script src="~/Content/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+    <script src="~/Content/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+</head>
+
+<body>
+    <!--头 -->
+    <header>
+        <article>
+            <div class="mt-logo">
+                <!--顶部导航条 -->
+                <div class="am-container header">
+                    <ul class="message-l">
+                        <div class="topMessage">
+                            <div class="menu-hd">
+                                <a href="#" target="_top" class="h">亲，请登录</a>
+                                <a href="#" target="_top">免费注册</a>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="message-r">
+                        <div class="topMessage home">
+                            <div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+                        </div>
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng"><a href="javascript:location.href='/Personal/SingePersonalCenter'" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                        </div>
+                        <div class="topMessage mini-cart">
+                            <div class="menu-hd"><a id="mc-menu-hd" href="javascript:location.href='/ShopCar/SingShopCar'" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>我的购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+                        </div>
+                        <div class="topMessage favorite">
+                            <div class="menu-hd"><a href="javascript:location.href='/ShowMasters/GoodsAddCollect'" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>商品收藏</span></a></div>
+                        </div>
+                    </ul>
+                </div>
+
+                <!--悬浮搜索框-->
+
+                <div class="nav white">
+                    <div class="logoBig">
+                        <li><img src="../images/logobig.png" /></li>
+                    </div>
+
+                    <div class="search-bar pr">
+                        <a name="index_none_header_sysc" href="#"></a>
+                        <form>
+                            <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            </div>
+        </article>
+    </header>
+    <div class="nav-table">
+        <div class="long-title"><span class="all-goods">全部分类</span></div>
+        <div class="nav-cont">
+            <ul>
+                <li class="index"><a href="#">首页</a></li>
+            </ul>
+        </div>
+    </div>
+    <b class="line"></b>
+    <div class="center">
+        <div class="col-main">
+            <div class="main-wrap">
+
+                <div class="user-order">
+
+                    <!--标题 -->
+                    <div class="am-cf am-padding">
+                        <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> / <small>Change</small></div>
+                    </div>
+                    <hr />
+
+                    <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+
+                        <div class="am-tabs-bd">
+                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                                <div class="order-top">
+                                    <div class="th th-item">
+                                        <td class="td-inner">商品</td>
+                                    </div>
+                                    <div class="th th-orderprice th-price">
+                                        <td class="td-inner">交易金额</td>
+                                    </div>
+                                    <div class="th th-changeprice th-price">
+                                    </div>
+                                    <div class="th th-status th-moneystatus">
+                                        <td class="td-inner">订单状态</td>
+                                    </div>
+                                    <div class="th th-change th-changebuttom">
+                                    </div>
+                                </div>
+                                <div class="order-main">
+                                    <div class="order-list">
+                                        <div id="dddd" class="order-content">
+                                            <!--订单-->
+                                            <!--@for (int i = 0; i < 5; i++)
+                                            {
+                                                <div class="ding">
+                                                    <div class="imgs">
+
+                                                    </div>
+                                                    <div class="desc">
+                                                        <div class="des">
+
+                                                        </div>
+                                                        <div class="col">
+
+                                                        </div>
+                                                        <div class="size">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="money">
+
+                                                    </div>
+                                                    <div class="state">
+
+                                                    </div>
+                                                    <div class="btn">
+                                                        <form class="layui-form">
+                                                            <button type="button" class="layui-btn">确认付款</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            }-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <style>
+                                .money {
+                                    width: 80px;
+                                    height: 26px;
+                                    float: left;
+                                    margin-top: 38px;
+                                    margin-left: -8px;
+                                    text-align: center;
+                                }
+
+                                .btn {
+                                    width: 97px;
+                                    height: 42px;
+                                    float: right;
+                                    margin-top: 30px;
+                                    margin-right: 8px;
+                                }
+
+                                .state {
+                                    width: 80px;
+                                    height: 26px;
+                                    float: left;
+                                    margin-top: 38px;
+                                    margin-left: 18px;
+                                    text-align: center;
+                                }
+
+                                .des {
+                                    width: 300px;
+                                    height: 42px;
+                                    float: left;
+                                }
+
+                                .col {
+                                    width: 150px;
+                                    height: 35px;
+                                    float: left;
+                                    text-align: center;
+                                }
+
+                                .size {
+                                    width: 150px;
+                                    height: 32px;
+                                    float: left;
+                                    text-align: center;
+                                }
+
+                                .desc {
+                                    width: 299px;
+                                    height: 112px;
+                                    float: left;
+                                }
+
+                                .ding {
+                                    width: 750px;
+                                    height: 110px;
+                                    border: solid;
+                                    float: left;
+                                    margin-top: 25px;
+                                    border-color: #EEEEEE;
+                                    border-width: 1px;
+                                }
+
+                                .imgs {
+                                    width: 111px;
+                                    height: 112px;
+                                    float: left;
+                                }
+                            </style>
+                            <div class="am-tab-panel am-fade" id="tab2">
+                                <div class="order-top">
+                                </div>
+                                <div class="order-main">
+                                    <div class="order-list">
+                                        <div class="order-title">
+
+                                        </div>
+                                        <div class="order-content">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                //Demo
+                layui.use('form', function () {
+                    var form = layui.form;
+
+                    //监听提交
+                    form.on('submit(formDemo)', function (data) {
+                        layer.msg(JSON.stringify(data.field));
+                        return false;
+                    });
+                });
+            </script>
+            <!--底部-->
+            <div class="footer">
+                <div class="footer-hd">
+                    <p>
+                        <a href="#">姐妹科技</a>
+                        <b>|</b>
+                        <a href="#">商城首页</a>
+                        <b>|</b>
+                        <a href="#">姐妹支付</a>
+                        <b>|</b>
+                        <a href="#">姐妹物流</a>
+                    </p>
+                </div>
+                <div class="footer-bd">
+                    <p>
+                        <a href="#">关于姐妹</a>
+                        <a href="#">合作姐妹</a>
+                        <a href="#">联系姐妹</a>
+                        <a href="#">网站地图</a>
+                        <em>© 2020-2030JieMei.com最终解释权归姐妹所有</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <aside class="menu">
+            <ul>
+                <li class="person active">
+                    <a><i class="am-icon-user"></i>个人中心</a>
+                </li>
+                <li class="person">
+                    <p><i class="am-icon-newspaper-o"></i>个人资料</p>
+                    <ul>
+                        <li> <a href="javascript:location.href='/Personal/SingePersonalCenter'">个人信息</a></li>
+                        <li> <a href="javascript:location.href='/Personal/'">安全设置</a></li>
+                        <li> <a href="javascript:location.href='/Personal/Place'">地址管理</a></li>
+                    </ul>
+                </li>
+                <li class="person">
+                    <p><i class="am-icon-balance-scale"></i>我的订单</p>
+                    <ul>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderPayMoney'">待付款</a></li>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderFh'">待发货</a></li>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderMessage'">待收货</a></li>
+                        <li><a href="javascript:location.href='/ShowMasters/OrderRemark'">待评价</a></li>
+                    </ul>
+                </li>
+                <li class="person">
+                    <p><i class="am-icon-dollar"></i>我的资产</p>
+                    <ul>
+                        <li> <a href="javascript:location.href='/ShowMasters/DisMessage'">优惠券 </a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">账户余额</a></li>
+                    </ul>
+                </li>
+
+                <li class="person">
+                    <p><i class="am-icon-tags"></i>我的收藏</p>
+                    <ul>
+                        <li> <a href="javascript:location.href='/ShowMasters/GoodsAddCollect'">收藏</a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">足迹</a></li>
+                    </ul>
+                </li>
+
+                <li class="person">
+                    <ul>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">意见反馈</a></li>
+                        <li> <a href="javascript:location.href='/ShowMasters/'">我的消息</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        ShowOrderInfo();
+    })
+    function ShowOrderInfo() {
+        $.ajax({
+            url: "http://localhost:50519/api/myorderinfo/getorderinfos?UserId=2"+"&State=4",
+            dataType: "json",
+            type: "get",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#dddd").empty();
+                console.log(d);
+                $(d).each(function () {
+                    var html = "<div class='ding'>"+
+                        "<div class='imgs'><img style='width:105px;height:107px;' onclick='LookOrderInfo(" + this.orderInfoId+")' src='" + this.goodsImg+"' /></div>"+
+                        "<div class='desc'>"+
+                        "<div class='des'>" + this.goodsInfoDesc+"</div> "+
+                        "<div class='col'>" + this.goodsColor+"</div> "+
+                        "<div class='size'>" + this.goodsSize+"</div> "+
+                        "</div> "+
+                        "<div class='money'>" + this.orderInfoSumPrice+"</div> "+
+                        "<div class='state'>待评价</div> "+
+                        "<div class='btn'> "+
+                        "<form class='layui-form'> "+
+                        "<button onclick='Remark(" + this.goodsInfoId + ")' type='button' class='layui-btn'>评价</button> "+
+                            "</form> "+
+                        "</div> "+
+                    "</div> ";
+                    $("#dddd").append(html);
+                })
+            }
+        });
+    }
+    function Remark(GoodsInfoId) {
+        alert(GoodsInfoId);
+    }
+    //修改为已评价
+    function UpdateState(OrderId, State) {
+        alert(OrderId);
+        alert(State);
+        $.ajax({
+            url: "http://localhost:50519/api/myorderinfo/UpdateOrderInfoBuy?OrderId=" + OrderId + "&State=" + State,
+            dataType: "json",
+            type: "get",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                if (d > 0) {
+                    alert("成功！");
+                    ShowOrderInfo();
+                }
+            }
+        });
+    }
+    function LookOrderInfo(GoodId) {
+        alert(GoodId);
+    }
+</script>
