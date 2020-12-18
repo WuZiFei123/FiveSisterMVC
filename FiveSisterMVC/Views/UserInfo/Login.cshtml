@@ -180,17 +180,16 @@
             var text = input.value //获取输入框的值
             //var UserInfoName = $("#Uname").val();
             //var UserInfoPass = $("#Upass").val();
-            var name = $("#name").val();
-            var pwd = $("#pass").val();
+            var name = $("#Uname").val();
+            var pwd = $("#Upass").val();
             if (text === num) {
                 $.ajax({
                     url: "http://localhost:50519/api/GoodsUserInfo/GetUserInfos?name=" + name + "&pass=" + pwd,
                     type: "get",
-                    //data: { uname: Uname, Upass: Upass },
                     dataType: "json",
                     success: function (d) {
                         if (d != null) {
-                            location.href = "/ShowMasters/ShowMaster";
+                            location.href = "/ShowMasters/ShowMaster?UserId=" + d.userInfoId;
                         }
                         else {
                             alert("登陆失败！");

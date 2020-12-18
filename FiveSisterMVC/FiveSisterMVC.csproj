@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\..\..\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
   </ItemGroup>
 
